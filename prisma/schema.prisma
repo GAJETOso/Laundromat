@@ -1,0 +1,657 @@
+// Lustra — platform database schema (PostgreSQL)
+//
+// This schema models the full production platform: identity, orders across all
+// four service lines, machines & reservations, subscriptions & loyalty,
+// commercial accounts & SLAs, logistics, payments, messaging, and CMS.
+// The in-memory store in src/lib/store.ts mirrors a subset of these shapes.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/* ------------------------------- Identity ------------------------------- */
+
+enum Role {
+  CUSTOMER
+  DRIVER
+  STAFF
+  ACCOUNT_MANAGER
+  ADMIN
+  SUPER_ADMIN
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  phone         String?   @unique
+  passwordHash  String?
+  name          String
+  role          Role      @default(CUSTOMER)
+  emailVerified DateTime?
+  twoFactorSecret String?
+  twoFactorEnabled Boolean @default(false)
+  locale        String    @default("en")
+  marketingOptIn Boolean  @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  deletedAt     DateTime? // soft delete for GDPR erasure workflow
+
+  addresses     Address[]
+  orders        Order[]
+  subscriptions Subscription[]
+  loyaltyEvents LoyaltyEvent[]
+  paymentMethods PaymentMethod[]
+  notifications NotificationPreference[]
+  supportTickets SupportTicket[]
+  reviews       Review[]
+  referralsGiven Referral[] @relation("referrer")
+  referralsUsed  Referral[] @relation("referee")
+  driverProfile DriverProfile?
+  businessMemberships BusinessMember[]
+  auditLogs     AuditLog[]
+  sessions      Session[]
+  preference    LaundryPreference?
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash    String   @unique
+  userAgent    String?
+  ip           String?
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+
+  @@index([userId])
+}
+
+model Address {
+  id        String  @id @default(cuid())
+  userId    String
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  label     String  @default("Home")
+  line1     String
+  line2     String?
+  city      String
+  state     String
+  zip       String
+  country   String  @default("US")
+  lat       Float?
+  lng       Float?
+  notes     String? // gate codes, doorman, drop spot
+  isDefault Boolean @default(false)
+
+  pickups   Order[] @relation("pickupAddress")
+  deliveries Order[] @relation("deliveryAddress")
+
+  @@index([userId])
+}
+
+model LaundryPreference {
+  id           String  @id @default(cuid())
+  userId       String  @unique
+  user         User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  detergent    String  @default("premium") // premium | hypoallergenic | eco | scent-free
+  softener     Boolean @default(true)
+  waterTemp    String  @default("warm")    // cold | warm | hot
+  dryHeat      String  @default("medium")  // low | medium | high | hang-dry
+  foldStyle    String  @default("standard")// standard | kondo | hangers
+  starchLevel  String  @default("none")    // none | light | medium | crisp
+  hangDryItems String?                     // free-text list
+}
+
+/* -------------------------------- Catalog -------------------------------- */
+
+enum ServiceLine {
+  SELF_SERVICE
+  PICKUP_DELIVERY
+  COMMERCIAL
+  DRY_CLEANING
+}
+
+model PriceItem {
+  id          String      @id @default(cuid())
+  serviceLine ServiceLine
+  code        String      @unique // e.g. WF_PER_LB, DC_SUIT, MACHINE_W20
+  name        String
+  unit        String      // lb | item | cycle | month | sqft
+  amountCents Int
+  active      Boolean     @default(true)
+  metadata    Json?
+  updatedAt   DateTime    @updatedAt
+
+  orderItems  OrderItem[]
+}
+
+/* --------------------------------- Orders -------------------------------- */
+
+enum OrderStatus {
+  DRAFT
+  SCHEDULED
+  PICKED_UP
+  PROCESSING
+  QUALITY_CHECK
+  READY
+  OUT_FOR_DELIVERY
+  DELIVERED
+  COMPLETED
+  CANCELLED
+}
+
+model Order {
+  id                String      @id @default(cuid())
+  number            String      @unique // human-facing LST-XXXX
+  userId            String?
+  user              User?       @relation(fields: [userId], references: [id])
+  businessAccountId String?
+  businessAccount   BusinessAccount? @relation(fields: [businessAccountId], references: [id])
+  serviceLine       ServiceLine
+  status            OrderStatus @default(SCHEDULED)
+
+  pickupAddressId   String?
+  pickupAddress     Address?    @relation("pickupAddress", fields: [pickupAddressId], references: [id])
+  deliveryAddressId String?
+  deliveryAddress   Address?    @relation("deliveryAddress", fields: [deliveryAddressId], references: [id])
+
+  pickupDate        DateTime?
+  pickupWindow      String?     // "9–11 AM"
+  deliveryDate      DateTime?
+  deliveryWindow    String?
+  recurringRule     String?     // RRULE for recurring pickups
+  turnaround        String      @default("standard") // standard | express | same-day
+
+  weightLbs         Decimal?    @db.Decimal(6, 2)
+  instructions      String?
+  garmentPhotos     String[]    // Cloudinary URLs
+  intakePhotos      String[]
+  deliveryPhotoUrl  String?
+  signatureUrl      String?
+
+  subtotalCents     Int         @default(0)
+  discountCents     Int         @default(0)
+  taxCents          Int         @default(0)
+  totalCents        Int         @default(0)
+  couponId          String?
+  coupon            Coupon?     @relation(fields: [couponId], references: [id])
+
+  items             OrderItem[]
+  events            OrderEvent[]
+  routeStops        RouteStop[]
+  payment           Payment?
+  review            Review?
+  invoiceId         String?
+  invoice           Invoice?    @relation(fields: [invoiceId], references: [id])
+
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+
+  @@index([userId, status])
+  @@index([businessAccountId])
+  @@index([status, pickupDate])
+}
+
+model OrderItem {
+  id          String    @id @default(cuid())
+  orderId     String
+  order       Order     @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  priceItemId String
+  priceItem   PriceItem @relation(fields: [priceItemId], references: [id])
+  quantity    Decimal   @db.Decimal(8, 2)
+  amountCents Int       // quantity × unit price at order time
+  notes       String?
+
+  @@index([orderId])
+}
+
+model OrderEvent {
+  id        String      @id @default(cuid())
+  orderId   String
+  order     Order       @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  status    OrderStatus
+  note      String?
+  actorId   String?     // staff/driver/system
+  createdAt DateTime    @default(now())
+
+  @@index([orderId, createdAt])
+}
+
+/* ------------------------- Machines & reservations ------------------------ */
+
+enum MachineType {
+  WASHER
+  DRYER
+}
+
+enum MachineStatus {
+  AVAILABLE
+  RUNNING
+  RESERVED
+  FINISHING
+  MAINTENANCE
+  OFFLINE
+}
+
+model Location {
+  id        String    @id @default(cuid())
+  slug      String    @unique
+  name      String
+  line1     String
+  city      String
+  state     String
+  zip       String
+  lat       Float
+  lng       Float
+  phone     String
+  hours     Json      // per-day open/close
+  amenities String[]
+  active    Boolean   @default(true)
+
+  machines  Machine[]
+  routes    Route[]
+}
+
+model Machine {
+  id           String        @id @default(cuid())
+  locationId   String
+  location     Location      @relation(fields: [locationId], references: [id])
+  label        String        // e.g. "W-07"
+  type         MachineType
+  capacityLbs  Int
+  priceCents   Int
+  status       MachineStatus @default(AVAILABLE)
+  cycleEndsAt  DateTime?
+  iotDeviceId  String?       @unique
+  lastHeartbeat DateTime?
+
+  reservations MachineReservation[]
+  activations  MachineActivation[]
+
+  @@unique([locationId, label])
+  @@index([locationId, status])
+}
+
+model MachineReservation {
+  id         String   @id @default(cuid())
+  machineId  String
+  machine    Machine  @relation(fields: [machineId], references: [id])
+  userId     String
+  startsAt   DateTime
+  holdUntil  DateTime // startsAt + 15 min grace
+  status     String   @default("held") // held | claimed | expired | cancelled
+  createdAt  DateTime @default(now())
+
+  @@index([machineId, startsAt])
+  @@index([userId])
+}
+
+model MachineActivation {
+  id          String   @id @default(cuid())
+  machineId   String
+  machine     Machine  @relation(fields: [machineId], references: [id])
+  userId      String?
+  qrNonce     String   @unique
+  amountCents Int
+  paymentId   String?
+  startedAt   DateTime @default(now())
+  endsAt      DateTime
+
+  @@index([machineId, startedAt])
+}
+
+/* ----------------------- Subscriptions & loyalty ------------------------- */
+
+enum SubscriptionStatus {
+  ACTIVE
+  PAUSED
+  PAST_DUE
+  CANCELLED
+}
+
+model Subscription {
+  id               String             @id @default(cuid())
+  userId           String
+  user             User               @relation(fields: [userId], references: [id])
+  plan             String             // essential | plus | family
+  status           SubscriptionStatus @default(ACTIVE)
+  monthlyLbs       Int
+  usedLbs          Decimal            @default(0) @db.Decimal(6, 2)
+  rolloverLbs      Decimal            @default(0) @db.Decimal(6, 2)
+  priceCents       Int
+  stripeSubscriptionId String?        @unique
+  currentPeriodEnd DateTime
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+
+  @@index([userId, status])
+}
+
+model LoyaltyEvent {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  points    Int      // positive = earn, negative = redeem
+  reason    String   // order | referral | off-peak | redemption | adjustment
+  orderId   String?
+  createdAt DateTime @default(now())
+
+  @@index([userId, createdAt])
+}
+
+model Referral {
+  id         String   @id @default(cuid())
+  referrerId String
+  referrer   User     @relation("referrer", fields: [referrerId], references: [id])
+  refereeId  String?  @unique
+  referee    User?    @relation("referee", fields: [refereeId], references: [id])
+  code       String   @unique
+  rewardedAt DateTime?
+  createdAt  DateTime @default(now())
+}
+
+model Coupon {
+  id           String    @id @default(cuid())
+  code         String    @unique
+  description  String?
+  percentOff   Int?
+  amountOffCents Int?
+  maxRedemptions Int?
+  redemptions  Int       @default(0)
+  firstOrderOnly Boolean @default(false)
+  expiresAt    DateTime?
+  active       Boolean   @default(true)
+
+  orders       Order[]
+}
+
+model GiftCard {
+  id           String   @id @default(cuid())
+  code         String   @unique
+  initialCents Int
+  balanceCents Int
+  purchaserEmail String?
+  recipientEmail String?
+  expiresAt    DateTime?
+  createdAt    DateTime @default(now())
+}
+
+/* ----------------------------- Commercial / B2B --------------------------- */
+
+model BusinessAccount {
+  id             String   @id @default(cuid())
+  name           String
+  industry       String
+  taxId          String?
+  billingEmail   String
+  accountManagerId String?
+  slaHours       Int      @default(24)
+  volumePricing  Json?    // tiered per-lb / per-piece rates
+  contractUrl    String?
+  contractEndsAt DateTime?
+  active         Boolean  @default(true)
+  createdAt      DateTime @default(now())
+
+  members        BusinessMember[]
+  orders         Order[]
+  invoices       Invoice[]
+  leads          CommercialLead[]
+}
+
+model BusinessMember {
+  id                String          @id @default(cuid())
+  businessAccountId String
+  businessAccount   BusinessAccount @relation(fields: [businessAccountId], references: [id], onDelete: Cascade)
+  userId            String
+  user              User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role              String          @default("member") // owner | manager | member
+
+  @@unique([businessAccountId, userId])
+}
+
+model CommercialLead {
+  id                String   @id @default(cuid())
+  company           String
+  industry          String
+  contact           String
+  email             String
+  phone             String?
+  weeklyVolume      String
+  message           String?
+  status            String   @default("new") // new | contacted | quoted | won | lost
+  businessAccountId String?
+  businessAccount   BusinessAccount? @relation(fields: [businessAccountId], references: [id])
+  createdAt         DateTime @default(now())
+
+  @@index([status, createdAt])
+}
+
+/* ------------------------------- Logistics -------------------------------- */
+
+model DriverProfile {
+  id        String  @id @default(cuid())
+  userId    String  @unique
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  vehicle   String?
+  licensePlate String?
+  active    Boolean @default(true)
+  lastLat   Float?
+  lastLng   Float?
+  lastSeenAt DateTime?
+
+  routes    Route[]
+}
+
+model Route {
+  id         String   @id @default(cuid())
+  date       DateTime @db.Date
+  driverId   String
+  driver     DriverProfile @relation(fields: [driverId], references: [id])
+  locationId String
+  location   Location @relation(fields: [locationId], references: [id])
+  optimizedAt DateTime?
+  polyline   String?  // encoded route geometry
+
+  stops      RouteStop[]
+
+  @@index([date, driverId])
+}
+
+model RouteStop {
+  id        String   @id @default(cuid())
+  routeId   String
+  route     Route    @relation(fields: [routeId], references: [id], onDelete: Cascade)
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id])
+  sequence  Int
+  kind      String   // pickup | delivery
+  window    String
+  status    String   @default("pending") // pending | arrived | done | failed
+  proofPhotoUrl String?
+  signatureUrl  String?
+  completedAt DateTime?
+
+  @@unique([routeId, sequence])
+  @@index([orderId])
+}
+
+/* -------------------------------- Payments -------------------------------- */
+
+enum PaymentStatus {
+  PENDING
+  AUTHORIZED
+  CAPTURED
+  REFUNDED
+  PARTIALLY_REFUNDED
+  FAILED
+}
+
+model PaymentMethod {
+  id        String  @id @default(cuid())
+  userId    String
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  provider  String  // stripe | paypal | paystack | flutterwave | wallet
+  token     String  // provider token/reference — never raw PANs
+  brand     String?
+  last4     String?
+  isDefault Boolean @default(false)
+
+  @@index([userId])
+}
+
+model Payment {
+  id           String        @id @default(cuid())
+  orderId      String        @unique
+  order        Order         @relation(fields: [orderId], references: [id])
+  provider     String
+  providerRef  String?       @unique
+  amountCents  Int
+  currency     String        @default("USD")
+  status       PaymentStatus @default(PENDING)
+  capturedAt   DateTime?
+  refundedCents Int          @default(0)
+  createdAt    DateTime      @default(now())
+}
+
+model WalletTransaction {
+  id          String   @id @default(cuid())
+  userId      String
+  amountCents Int      // positive = credit, negative = debit
+  reason      String   // top-up | order | refund | gift-card | points-conversion
+  reference   String?
+  createdAt   DateTime @default(now())
+
+  @@index([userId, createdAt])
+}
+
+model Invoice {
+  id                String   @id @default(cuid())
+  number            String   @unique // INV-2026-0107
+  businessAccountId String?
+  businessAccount   BusinessAccount? @relation(fields: [businessAccountId], references: [id])
+  userId            String?
+  periodStart       DateTime
+  periodEnd         DateTime
+  amountCents       Int
+  taxCents          Int      @default(0)
+  status            String   @default("open") // open | paid | overdue | void
+  pdfUrl            String?
+  dueAt             DateTime
+  paidAt            DateTime?
+  createdAt         DateTime @default(now())
+
+  orders            Order[]
+
+  @@index([businessAccountId, status])
+}
+
+/* ----------------------------- Messaging & bots --------------------------- */
+
+model NotificationPreference {
+  id      String  @id @default(cuid())
+  userId  String
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event   String  // order-updates | driver-arrival | promotions | cycle-finished
+  channels String[] // sms | email | push | whatsapp | telegram
+
+  @@unique([userId, event])
+}
+
+model ConversationMessage {
+  id        String   @id @default(cuid())
+  channel   String   // web | whatsapp | telegram
+  externalId String? // wa message id / tg update id (idempotency)
+  userId    String?
+  direction String   // inbound | outbound
+  body      String
+  intent    String?  // resolved assistant intent
+  handedOff Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([channel, createdAt])
+  @@unique([channel, externalId])
+}
+
+model SupportTicket {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  orderId   String?
+  subject   String
+  body      String
+  status    String   @default("open") // open | pending | resolved
+  priority  String   @default("normal")
+  createdAt DateTime @default(now())
+  resolvedAt DateTime?
+
+  @@index([status, createdAt])
+}
+
+/* ---------------------------------- CMS ---------------------------------- */
+
+model BlogPost {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  title     String
+  excerpt   String
+  category  String
+  authorName String
+  body      String   // MDX
+  published Boolean  @default(false)
+  publishedAt DateTime?
+  seoTitle  String?
+  seoDescription String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  orderId   String   @unique
+  order     Order    @relation(fields: [orderId], references: [id])
+  rating    Int      // 1–5
+  body      String?
+  published Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model NewsletterSubscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  confirmed Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+/* ------------------------------ Ops & audit ------------------------------- */
+
+model InventoryItem {
+  id        String @id @default(cuid())
+  sku       String @unique
+  name      String // detergent, bags, hangers…
+  unit      String
+  quantity  Decimal @db.Decimal(10, 2)
+  reorderAt Decimal @db.Decimal(10, 2)
+  locationSlug String?
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  actorId   String?
+  actor     User?    @relation(fields: [actorId], references: [id])
+  action    String   // e.g. order.refund, price.update, user.role-change
+  entity    String
+  entityId  String
+  before    Json?
+  after     Json?
+  ip        String?
+  createdAt DateTime @default(now())
+
+  @@index([entity, entityId])
+  @@index([actorId, createdAt])
+}

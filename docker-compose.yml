@@ -1,0 +1,30 @@
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgresql://lustra:lustra@db:5432/lustra
+      - REDIS_URL=redis://cache:6379
+    depends_on:
+      - db
+      - cache
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: lustra
+      POSTGRES_PASSWORD: lustra
+      POSTGRES_DB: lustra
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  cache:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+volumes:
+  pgdata:

@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: "SF Pro Display", "Inter", "Segoe UI Variable", "Segoe UI", system-ui;
+  --font-display: "SF Pro Display", "Inter", "Segoe UI Variable", "Segoe UI", system-ui;
+
+  --bg: 247 248 251;
+  --fg: 11 18 32;
+  --card: 255 255 255;
+  --muted: 100 116 139;
+  --border: 226 232 240;
+  --accent: 6 182 212;
+}
+
+.dark {
+  --bg: 6 10 20;
+  --fg: 237 242 250;
+  --card: 13 20 36;
+  --muted: 148 163 184;
+  --border: 30 41 59;
+  --accent: 34 211 238;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-[rgb(var(--bg))] text-[rgb(var(--fg))] antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    @apply bg-aqua-400/30;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-aqua-500 ring-offset-2 ring-offset-[rgb(var(--bg))];
+  }
+}
+
+@layer components {
+  .glass {
+    @apply border border-white/20 bg-white/60 backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.06];
+  }
+
+  .card {
+    @apply rounded-3xl border border-[rgb(var(--border))] bg-[rgb(var(--card))] shadow-card;
+  }
+
+  .section {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8;
+  }
+
+  .h-display {
+    @apply font-display font-semibold tracking-tight;
+  }
+
+  .text-muted {
+    @apply text-[rgb(var(--muted))];
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-aqua-400 via-aqua-500 to-ink-500 bg-clip-text text-transparent;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-cta-gradient px-6 py-3 text-sm font-semibold text-white shadow-glow transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_80px_-12px_rgba(34,211,238,.55)] active:translate-y-0;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-[rgb(var(--border))] bg-[rgb(var(--card))] px-6 py-3 text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:border-aqua-500/50 hover:shadow-card active:translate-y-0;
+  }
+
+  .input {
+    @apply w-full rounded-2xl border border-[rgb(var(--border))] bg-[rgb(var(--card))] px-4 py-3 text-sm outline-none transition-colors placeholder:text-[rgb(var(--muted))]/70 focus:border-aqua-500;
+  }
+
+  .label {
+    @apply mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-[rgb(var(--border))] bg-[rgb(var(--card))] px-3 py-1 text-xs font-medium;
+  }
+
+  .skeleton {
+    @apply relative overflow-hidden rounded-xl bg-[rgb(var(--border))]/60;
+  }
+  .skeleton::after {
+    content: "";
+    @apply absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/40 to-transparent dark:via-white/10;
+  }
+}
