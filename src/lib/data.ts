@@ -9,6 +9,7 @@ import {
   Gem,
   Zap,
   CalendarClock,
+  Crown,
 } from "lucide-react";
 
 /* ---------------------------------- Services ---------------------------------- */
@@ -116,6 +117,7 @@ export const secondaryServices = [
   { slug: "wash-fold", name: "Wash & Fold", icon: Shirt, short: "Everyday laundry, folded to retail standard", href: "/services/wash-fold" },
   { slug: "ironing", name: "Ironing & Pressing", icon: Wind, short: "Crisp, boutique-grade finishing", href: "/services/ironing" },
   { slug: "special-garments", name: "Special Garments", icon: Gem, short: "Couture, vintage & delicate textiles", href: "/services/special-garments" },
+  { slug: "traditional-attire", name: "Traditional & Cultural Attire", icon: Crown, short: "Agbada, Aso-Oke, Ankara, lace & gele", href: "/services/traditional-attire" },
   { slug: "express", name: "Express Laundry", icon: Zap, short: "Back in your closet within hours", href: "/services/express" },
   { slug: "subscriptions", name: "Subscription Plans", icon: CalendarClock, short: "Set-and-forget laundry, monthly", href: "/services/subscriptions" },
 ];
@@ -466,6 +468,24 @@ export const posts: Post[] = [
       "Rule two — cold water first, always. Heat sets protein stains (blood, egg, dairy) permanently. A hot-water instinct on a blood stain is how a rescue becomes a write-off.",
       "Rule three — skip the chlorine bleach. It destroys spandex, yellows wool and silk, and reacts with protein stains to create permanent yellow scars. More garments die from bleach enthusiasm than from the original stain.",
       "Oil-based stains want dish soap; tannins (wine, coffee, tea) want cool water and patience; ink wants isopropyl alcohol dabbed from behind. And anything you love enough to Google about, you love enough to bring to us — mention the stain at drop-off and our team pre-treats it free.",
+    ],
+  },
+  {
+    slug: "caring-for-aso-oke-ankara-and-lace",
+    title: "Caring for Aso-Oke, Ankara & Lace: A Specialist's Guide to Traditional Attire",
+    excerpt:
+      "Why wax prints fade, how hand-woven Aso-Oke loses its body, and the storage mistake that ruins lace — a traditional-attire artisan explains.",
+    category: "Fabric Care",
+    readMinutes: 6,
+    date: "2026-06-25",
+    author: "Sofia Marchetti, Couture Studio Lead",
+    content: [
+      "Traditional attire is where fabric care matters most, because these garments are rarely just clothes — they mark weddings, naming ceremonies, and family milestones, and many are meant to be worn for decades.",
+      "Ankara first: those saturated colors come from wax-resist dyeing, and conventional dry-cleaning solvents dissolve exactly what makes the print glow. The right process is a pH-balanced wet clean after a colorfastness test on an inside seam. At home, wash cold, inside out, with a dye-safe detergent — and never wring; roll in a towel instead.",
+      "Aso-Oke is a structure problem, not a stain problem. The hand-woven strips hold a deliberate body that flat pressing destroys and steam can relax too far. Professionals clean it with minimal agitation and reshape it by hand while it dries. Between events, fold along the weave with acid-free tissue in the folds — never hang it, and never store it in plastic.",
+      "Lace — cord, Swiss, or French — usually fails at the embellishments before the fabric. Stones and beadwork are glued or tacked, and both give way in a machine. Have embellished pieces cleaned face-down by hand, and inspect the stonework every time it comes back; re-securing a loose stone costs pennies compared to replacing a panel.",
+      "Gele deserves its own note: the sheen on damask and sego comes from a finish that water spotting ruins. Spot-clean only, press on low with a cloth barrier, and store rolled rather than folded to avoid permanent creases.",
+      "And the storage mistake we see most: plastic. Wax prints, metallic threads, and starched cottons all need to breathe, or trapped humidity yellows them and tarnishes the metallics. Breathable cotton garment bags — or a proper preservation box for heirloom pieces — are the difference between attire that ages and attire that endures.",
     ],
   },
   {

@@ -15,6 +15,7 @@ const serviceLinks = [
   { href: "/services/commercial", label: "Commercial Laundry" },
   { href: "/services/dry-cleaning", label: "Dry Cleaning" },
   { href: "/services/wash-fold", label: "Wash & Fold" },
+  { href: "/services/traditional-attire", label: "Traditional & Cultural Attire" },
   { href: "/services/express", label: "Express Laundry" },
   { href: "/services/subscriptions", label: "Subscription Plans" },
 ];

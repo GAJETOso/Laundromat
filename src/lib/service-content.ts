@@ -292,6 +292,44 @@ export const serviceContent: Record<string, ServiceContent> = {
       { q: "What's the cutoff for same-day?", a: "Express bookings close at 10 AM for same-evening delivery. After that, the app shows next-day express (guaranteed by noon) automatically." },
     ],
   },
+  "traditional-attire": {
+    slug: "traditional-attire",
+    name: "Traditional & Cultural Attire",
+    eyebrow: "Traditional attire",
+    headline: "Heritage deserves a specialist",
+    intro:
+      "Agbada, Aso-Oke, Ankara, kaftans, iro and buba, lace, and gele — garments that carry family history and cultural pride. Our traditional-attire artisans clean, press, and preserve them with the reverence they deserve.",
+    heroBullets: ["Hand-finished by attire specialists", "Colorfast-tested wax prints & dyes", "Starch & structure to your spec"],
+    sections: [
+      {
+        title: "Woven treasures, handled by hand",
+        body: "Aso-Oke and brocade are structured, hand-woven textiles that ordinary dry cleaning flattens and dulls. We clean them with low-agitation processes, reshape by hand, and finish with the crisp body the weave was made to hold — never pressed flat, never shined.",
+      },
+      {
+        title: "Wax prints that keep their fire",
+        body: "Ankara's saturated colors come from wax-resist dyeing that harsh solvents strip. Every piece is colorfast-tested first, then cleaned with pH-balanced, eco-friendly chemistry that lifts soil while the print keeps its depth — wash after wash, occasion after occasion.",
+      },
+      {
+        title: "Event-ready, exactly when you need it",
+        body: "Owambe on Saturday? We plan around your calendar: express turnaround for event weekends, gele pressed and folded ready to tie, and embroidery, beading, and stonework inspected and secured before anything is cleaned.",
+      },
+    ],
+    features: [
+      { title: "Agbada & kaftans", body: "Volume garments cleaned, pressed, and folded with structure intact." },
+      { title: "Aso-Oke & gele", body: "Hand-woven textiles reshaped and finished to hold their form." },
+      { title: "Ankara & wax prints", body: "Colorfast-tested, pH-balanced cleaning that protects the dye." },
+      { title: "Lace & embroidery", body: "Cord, Swiss, and French lace with beadwork secured first." },
+      { title: "Starch to your spec", body: "From soft drape to ceremonial crisp — saved to your profile." },
+      { title: "Heirloom preservation", body: "Acid-free boxing for wedding and family-heritage pieces." },
+    ],
+    pricingNote: "Agbada sets from $35 · Aso-Oke/gele from $18 · Ankara garments from $9 · assessed pieces quoted free",
+    cta: { title: "Bring us the garments that matter most", body: "Free pickup on traditional attire orders over $25 — photographed at intake, returned like new." },
+    faqs: [
+      { q: "Can you clean heavily embroidered or stoned lace?", a: "Yes — embellished lace goes through the couture studio: stones and beadwork are inspected and secured, then the garment is hand-cleaned face-down on padded mesh. Anything at risk is flagged with you before we proceed." },
+      { q: "Will dry cleaning fade my Ankara?", a: "Conventional solvent cleaning can. We colorfast-test every wax print and route it to a pH-balanced wet-clean process designed for reactive and wax-resist dyes, so the color stays saturated." },
+      { q: "How should I store Aso-Oke between events?", a: "Breathable cotton wrapping, never plastic, folded along the weave with acid-free tissue in the folds. Or let us preserve it — our heirloom boxing keeps woven metallics from tarnishing and fibers from creasing permanently." },
+    ],
+  },
   subscriptions: {
     slug: "subscriptions",
     name: "Subscription Plans",

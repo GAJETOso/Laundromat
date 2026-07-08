@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Hero } from "@/components/home/hero";
 import { Stats } from "@/components/home/stats";
 import { ServicesGrid } from "@/components/home/services-grid";
+import { FabricExpertise } from "@/components/home/fabric-expertise";
 import { MachineAvailability } from "@/components/home/machine-availability";
 import { HowItWorks } from "@/components/home/how-it-works";
 import { Testimonials } from "@/components/home/testimonials";
@@ -21,6 +22,7 @@ export default function HomePage() {
       <Hero />
       <Stats />
       <ServicesGrid />
+      <FabricExpertise />
       <HowItWorks />
       <MachineAvailability />
       <PricingPreview />
