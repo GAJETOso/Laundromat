@@ -19,6 +19,12 @@ const nextConfig = {
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }];
   },
+  async rewrites() {
+    // Stable, versioned API alias for the iOS/Android apps (docs/MOBILE.md).
+    // Web clients use /api/*; mobile pins /api/v1/* so future breaking changes
+    // can ship as /api/v2 without forcing an app update.
+    return [{ source: "/api/v1/:path*", destination: "/api/:path*" }];
+  },
 };
 
 export default nextConfig;

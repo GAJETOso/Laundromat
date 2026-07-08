@@ -74,12 +74,32 @@ docker compose up  # web + postgres + redis
   labeling, visible focus, `prefers-reduced-motion` honored globally
 - **Dark/light mode**, mobile bottom navigation, floating WhatsApp CTA
 
+### Mobile-ready (iOS & Android)
+The repo ships everything a native app needs to look and behave exactly like
+the web experience:
+- **Design tokens** (`mobile/design-tokens/`) — `tokens.json` as the single
+  source of truth, with generated `LustraTokens.swift` (SwiftUI),
+  `LustraTokens.kt` (Jetpack Compose), and `theme.ts` (React Native/Expo):
+  full color scales, adaptive light/dark semantics, the CTA gradient,
+  typography scale, radii, shadows, motion curves, and component specs
+- **Typed API client** (`mobile/api-client/lustra-api.ts`) — zero-dependency,
+  pinned to the stable `/api/v1/*` alias
+- **Remote config** — `GET /api/app-config` for version gating, feature
+  flags, store links, and theme accents
+- **Deep links** — Apple Universal Links (`/.well-known/apple-app-site-association`)
+  and Android App Links (`/.well-known/assetlinks.json`) served and mapped to
+  every key route, including QR machine activation (`/m/<machineId>`)
+- **Integration guide** ([docs/MOBILE.md](docs/MOBILE.md)) — screen map
+  mirroring the web 1:1, component equivalence table, push notification plan,
+  auth, offline strategy, and store go-live checklists
+
 ## Documentation
 
 | Doc | Contents |
 | --- | -------- |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | System design, layers, production swap-points, security posture |
 | [docs/API.md](docs/API.md) | Full endpoint reference |
+| [docs/MOBILE.md](docs/MOBILE.md) | iOS/Android integration: tokens, screens, deep links, push, stores |
 | [docs/BOTS.md](docs/BOTS.md) | WhatsApp/Telegram setup + LLM upgrade path |
 | [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) | Vercel & Docker deploys, CI/CD, SEO go-live checklist |
 | [docs/DESIGN-SYSTEM.md](docs/DESIGN-SYSTEM.md) | Brand, color, type, motion, component inventory |
@@ -96,3 +116,11 @@ Dashboards and the machine fleet run on labeled demo data so every flow is
 fully explorable without credentials. The seams to production services
 (Prisma, Redis, Stripe, Twilio, Meta, Telegram) are documented at each site
 and in the architecture doc.
+
+## License
+
+Proprietary — copyright © 2026 GAJETOso, all rights reserved (see
+[LICENSE](LICENSE)). The code is viewable for evaluation but may not be
+copied, modified, or redistributed without written permission. To open-source
+the project instead, replace `LICENSE` with an OSI license (MIT for maximum
+adoption, AGPL-3.0 to keep hosted derivatives open) and update this section.
