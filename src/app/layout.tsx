@@ -69,6 +69,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <FloatingCta />
         <Assistant />
         <BottomNav />
+        {/* KOMVIA AI bubble — positioned left; the native Assistant occupies bottom-right */}
+        <script
+          async
+          src="https://komvia-ai-os.vercel.app/js/embed.js"
+          data-project="laundromat"
+          data-position="left"
+        />
       </body>
     </html>
   );
