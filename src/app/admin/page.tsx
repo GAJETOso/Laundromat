@@ -105,7 +105,7 @@ export default function AdminPage() {
               <div className="flex h-40 items-end gap-2" role="img" aria-label="Bar chart of weekly revenue peaking Saturday at $6,100">
                 {weeklyRevenue.map((d) => (
                   <div key={d.day} className="flex flex-1 flex-col items-center gap-1.5">
-                    <span className="text-[10px] font-bold text-muted">${(d.amount / 1000).toFixed(1)}k</span>
+                    <span className="text-[10px] font-bold text-muted">₦{(d.amount / 1_000_000).toFixed(1)}M</span>
                     <div
                       className="w-full rounded-t-xl bg-cta-gradient transition-all hover:opacity-80"
                       style={{ height: `${(d.amount / maxRevenue) * 100}%` }}

@@ -94,7 +94,7 @@ export function getBooking(id: string) {
 
 const DEMO_TIMELINE: { status: OrderStatus; note: string }[] = [
   { status: "scheduled", note: "Pickup scheduled." },
-  { status: "picked_up", note: "Driver collected 3 sealed bags (est. 18 lbs)." },
+  { status: "picked_up", note: "Driver collected 3 sealed bags (est. 8 kg)." },
   { status: "processing", note: "Sorted and washing — hypoallergenic cycle." },
   { status: "quality_check", note: "Folded and passed 12-point quality check." },
   { status: "out_for_delivery", note: "Out for delivery — ETA 25 minutes." },

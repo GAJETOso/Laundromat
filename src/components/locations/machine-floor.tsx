@@ -69,7 +69,7 @@ export function MachineFloor({ locationId }: { locationId: string }) {
               <Icon className={cn("h-5 w-5", m.status === "running" && "animate-drum")} aria-hidden />
               <span className="text-[10px] font-bold">{m.id.split("-")[1]}</span>
               <span className="text-[9px] leading-none">
-                {m.minutesRemaining ? `${m.minutesRemaining}m` : `${m.capacityLbs} lb`}
+                {m.minutesRemaining ? `${m.minutesRemaining}m` : `${m.capacityKg} kg`}
               </span>
             </div>
           );

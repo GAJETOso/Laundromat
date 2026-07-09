@@ -9,7 +9,7 @@ import { site } from "@/lib/site";
 export const metadata = buildMetadata({
   title: "Locations — Find a Lustra Laundromat Near You",
   description:
-    "Three Lustra smart laundromats in Austin: Downtown, Midtown (open 24h), and University District. Live machine availability, free Wi-Fi, espresso bars, and parking.",
+    "Three Lustra smart laundromats in Lagos: Lekki, Victoria Island (open 24h), and Yaba. Live machine availability, free Wi-Fi, 24/7 power backup, and parking.",
   path: "/locations",
 });
 
@@ -22,9 +22,9 @@ function locationJsonLd() {
     address: {
       "@type": "PostalAddress",
       streetAddress: l.address,
-      addressLocality: "Austin",
-      addressRegion: "TX",
-      addressCountry: "US",
+      addressLocality: "Lagos",
+      addressRegion: "Lagos",
+      addressCountry: "NG",
     },
     parentOrganization: { "@id": `${site.url}/#business` },
     amenityFeature: l.amenities.map((a) => ({ "@type": "LocationFeatureSpecification", name: a })),

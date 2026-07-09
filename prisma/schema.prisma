@@ -81,7 +81,7 @@ model Address {
   city      String
   state     String
   zip       String
-  country   String  @default("US")
+  country   String  @default("NG")
   lat       Float?
   lng       Float?
   notes     String? // gate codes, doorman, drop spot
@@ -120,7 +120,7 @@ model PriceItem {
   serviceLine ServiceLine
   code        String      @unique // e.g. WF_PER_LB, DC_SUIT, MACHINE_W20
   name        String
-  unit        String      // lb | item | cycle | month | sqft
+  unit        String      // kg | item | cycle | month | sqm
   amountCents Int
   active      Boolean     @default(true)
   metadata    Json?
@@ -166,7 +166,7 @@ model Order {
   recurringRule     String?     // RRULE for recurring pickups
   turnaround        String      @default("standard") // standard | express | same-day
 
-  weightLbs         Decimal?    @db.Decimal(6, 2)
+  weightKg          Decimal?    @db.Decimal(6, 2)
   instructions      String?
   garmentPhotos     String[]    // Cloudinary URLs
   intakePhotos      String[]
@@ -262,7 +262,7 @@ model Machine {
   location     Location      @relation(fields: [locationId], references: [id])
   label        String        // e.g. "W-07"
   type         MachineType
-  capacityLbs  Int
+  capacityKg   Int
   priceCents   Int
   status       MachineStatus @default(AVAILABLE)
   cycleEndsAt  DateTime?
@@ -319,9 +319,9 @@ model Subscription {
   user             User               @relation(fields: [userId], references: [id])
   plan             String             // essential | plus | family
   status           SubscriptionStatus @default(ACTIVE)
-  monthlyLbs       Int
-  usedLbs          Decimal            @default(0) @db.Decimal(6, 2)
-  rolloverLbs      Decimal            @default(0) @db.Decimal(6, 2)
+  monthlyKg        Int
+  usedKg           Decimal            @default(0) @db.Decimal(6, 2)
+  rolloverKg       Decimal            @default(0) @db.Decimal(6, 2)
   priceCents       Int
   stripeSubscriptionId String?        @unique
   currentPeriodEnd DateTime
@@ -390,7 +390,7 @@ model BusinessAccount {
   billingEmail   String
   accountManagerId String?
   slaHours       Int      @default(24)
-  volumePricing  Json?    // tiered per-lb / per-piece rates
+  volumePricing  Json?    // tiered per-kg / per-piece rates
   contractUrl    String?
   contractEndsAt DateTime?
   active         Boolean  @default(true)
@@ -510,7 +510,7 @@ model Payment {
   provider     String
   providerRef  String?       @unique
   amountCents  Int
-  currency     String        @default("USD")
+  currency     String        @default("NGN")
   status       PaymentStatus @default(PENDING)
   capturedAt   DateTime?
   refundedCents Int          @default(0)

@@ -20,7 +20,7 @@ export const serviceContent: Record<string, ServiceContent> = {
     headline: "The laundromat, reinvented",
     intro:
       "Espresso in hand, washer reserved from your couch, machine started with a QR scan. Our floors feel more like a boutique hotel lobby than a laundry room — and the machines think like software.",
-    heroBullets: ["74 smart machines across 3 locations", "Reserve ahead, walk straight in", "From $3.50 per wash"],
+    heroBullets: ["74 smart machines across Lagos", "Reserve ahead, walk straight in", "From ₦2,500 per wash"],
     sections: [
       {
         title: "Reserve before you leave home",
@@ -32,7 +32,7 @@ export const serviceContent: Record<string, ServiceContent> = {
       },
       {
         title: "Spaces worth staying in",
-        body: "Free fast Wi-Fi, espresso bars, study pods, kids corners, and 24-hour access at Midtown. Wash day becomes the quietest, most productive hour of your week.",
+        body: "Free fast Wi-Fi, espresso bars, study pods, kids corners, 24/7 power backup at every location, and round-the-clock access at Victoria Island. Wash day becomes the quietest, most productive hour of your week.",
       },
     ],
     features: [
@@ -40,15 +40,15 @@ export const serviceContent: Record<string, ServiceContent> = {
       { title: "Machine reservations", body: "Hold any washer or dryer up to 2 hours ahead." },
       { title: "QR activation", body: "Start machines from your phone — completely contactless." },
       { title: "Cycle timers", body: "Live countdowns plus a ping the second your cycle ends." },
-      { title: "Loyalty points", body: "Every dollar earns points; off-peak visits earn double." },
+      { title: "Loyalty points", body: "Every naira earns points; off-peak visits earn double." },
       { title: "Student & family pricing", body: "15% student discount and family bundle packages." },
     ],
-    pricingNote: "Washes from $3.50 · dryers from $0.50 per 8 minutes · members save 15–20%",
-    cta: { title: "See what's free right now", body: "Live machine availability for all three locations, updated every minute." },
+    pricingNote: "Washes from ₦2,500 · dryers from ₦400 per 10 minutes · members save 15–20%",
+    cta: { title: "See what's free right now", body: "Live machine availability for all three Lagos locations, updated every minute." },
     faqs: [
       { q: "What happens if I'm late for my reservation?", a: "Your machine is held for 15 minutes past your slot. After that, it's released back to the floor and your reservation fee (if any) is refunded as points." },
       { q: "Do I need the app to use the machines?", a: "No — the QR code works from any phone browser. The app just makes it faster, adds notifications, and keeps your payment methods and points in one place." },
-      { q: "How do student discounts work?", a: "Verify your student ID once in the app (or at any front desk) and 15% comes off self-service pricing automatically at University District, always." },
+      { q: "How do student discounts work?", a: "Verify your student ID once in the app (or at any front desk) and 15% comes off self-service pricing automatically at Lustra Yaba, always." },
     ],
   },
   "pickup-delivery": {
@@ -58,7 +58,7 @@ export const serviceContent: Record<string, ServiceContent> = {
     headline: "Laundry that does itself",
     intro:
       "Schedule in 60 seconds. A sealed, barcoded bag leaves your doorstep and returns folded to retail standard — tracked live at every stage, delivered back within 24 hours.",
-    heroBullets: ["Free pickup & delivery", "24-hour standard turnaround", "Live driver tracking"],
+    heroBullets: ["Free pickup & delivery across Lagos", "24-hour standard turnaround", "Live driver tracking"],
     sections: [
       {
         title: "Your preferences, remembered forever",
@@ -81,7 +81,7 @@ export const serviceContent: Record<string, ServiceContent> = {
       { title: "Multichannel updates", body: "SMS, email, WhatsApp, and Telegram notifications." },
       { title: "Order history", body: "Every order, receipt, and preference in your dashboard." },
     ],
-    pricingNote: "Wash & fold $1.75/lb (10 lb minimum) · dry cleaning from $7 · pickup always free",
+    pricingNote: "Wash & fold ₦1,200/kg (4 kg minimum) · dry cleaning from ₦2,500 · pickup always free",
     cta: { title: "Your first pickup is 20% off", body: "Use code FRESH20 at checkout. Book now, cancel free up to 2 hours before." },
     faqs: [
       { q: "Do I need to be home for pickup or delivery?", a: "No. Leave your bag at the door, with a doorman, or in a designated spot — add instructions like gate codes to your order. We photograph every pickup and delivery for your records." },
@@ -95,7 +95,7 @@ export const serviceContent: Record<string, ServiceContent> = {
     eyebrow: "Commercial & B2B",
     headline: "Linen programs that run themselves",
     intro:
-      "Hotels, restaurants, med spas, gyms, salons, schools, and short-stay operators — Lustra runs SLA-backed linen and uniform programs with route pickups, live dashboards, and one clean monthly invoice.",
+      "Hotels, restaurants, med spas, gyms, salons, schools, and shortlet operators across Lagos — Lustra runs SLA-backed linen and uniform programs with route pickups, live dashboards, and one clean monthly invoice.",
     heroBullets: ["98.7% on-time SLA performance", "Volume pricing 30–45% below retail", "Dedicated account manager"],
     sections: [
       {
@@ -112,18 +112,18 @@ export const serviceContent: Record<string, ServiceContent> = {
       },
     ],
     features: [
-      { title: "Volume pricing", body: "Per-pound or per-piece rates that drop with scale." },
+      { title: "Volume pricing", body: "Per-kilogram or per-piece rates that drop with scale." },
       { title: "Contract SLAs", body: "Guaranteed turnaround with monitored compliance." },
       { title: "Route pickups", body: "Scheduled collection that never misses a shift." },
       { title: "Monthly invoicing", body: "Consolidated billing with cost-center breakdowns." },
       { title: "Enterprise dashboard", body: "Orders, SLAs, spend, and reports in real time." },
       { title: "Account manager", body: "One human who knows your operation by name." },
     ],
-    pricingNote: "Custom quotes within one business day · typical contracts from $500/month",
+    pricingNote: "Custom quotes within one business day · typical contracts from ₦800,000/month",
     cta: { title: "Get a quote in one business day", body: "Tell us your volume and industry — we'll model your program and price, free." },
     faqs: [
       { q: "What industries do you serve?", a: "Hotels, restaurants, healthcare clinics, gyms, salons and spas, schools, corporate offices, and Airbnb/short-stay operators. Uniform programs and industrial laundry are quoted separately." },
-      { q: "Is there a minimum volume?", a: "Commercial rates start around 100 lbs per week. Below that, our standard pickup & delivery service with a recurring schedule is usually the better deal — we'll tell you honestly which fits." },
+      { q: "Is there a minimum volume?", a: "Commercial rates start around 50 kg per week. Below that, our standard pickup & delivery service with a recurring schedule is usually the better deal — we'll tell you honestly which fits." },
       { q: "How fast can we onboard?", a: "Most accounts go live within a week of signing: route setup, linen count baseline, dashboard access, and your account manager's direct line." },
     ],
   },
@@ -134,7 +134,7 @@ export const serviceContent: Record<string, ServiceContent> = {
     headline: "Couture care, scientific precision",
     intro:
       "Suits, silk, leather, wedding dresses, designer pieces, rugs, and the curtains you keep meaning to deal with. Master cleaners, item-level insurance, and an eco-friendly process option on everything.",
-    heroBullets: ["From $7 per garment", "Express 6-hour service", "Insured up to $1,000 per item"],
+    heroBullets: ["From ₦2,500 per garment", "Express 6-hour service", "Insured up to ₦500,000 per item"],
     sections: [
       {
         title: "Every garment gets a diagnosis",
@@ -157,8 +157,8 @@ export const serviceContent: Record<string, ServiceContent> = {
       { title: "Express service", body: "In by 9 AM, ready by 3 PM — when you need it now." },
       { title: "Free minor repairs", body: "Loose buttons and small seams fixed without asking." },
     ],
-    pricingNote: "Shirts $7 · suits $19 · wedding dress preservation $189 · full list on the pricing page",
-    cta: { title: "Book a garment pickup", body: "Free collection and delivery on dry cleaning orders over $25." },
+    pricingNote: "Shirts ₦2,500 · suits ₦7,500 · wedding dress preservation ₦85,000 · full list on the pricing page",
+    cta: { title: "Book a garment pickup", body: "Free collection and delivery on dry cleaning orders over ₦20,000." },
     faqs: [
       { q: "Can you clean a dress with heavy beading?", a: "Yes — beaded and sequined pieces go to the couture studio, where they're cleaned face-down on padded mesh by hand. We test adhesives and threads first and photograph before/after." },
       { q: "What is eco-friendly dry cleaning?", a: "Professional wet cleaning: computer-controlled water-based cycles with biodegradable detergents, plus specialized finishing. It handles most 'dry clean only' labels beautifully with zero solvent residue." },
@@ -171,8 +171,8 @@ export const serviceContent: Record<string, ServiceContent> = {
     eyebrow: "Wash & fold",
     headline: "Folded like the store shelf",
     intro:
-      "Everyday laundry sorted, washed with premium chemistry, dried to fabric spec, and folded to retail standard. By the pound, honestly weighed, delivered back in 24 hours.",
-    heroBullets: ["$1.75 per pound", "24h standard turnaround", "Retail-standard folding"],
+      "Everyday laundry sorted, washed with premium chemistry, dried to fabric spec, and folded to retail standard. By the kilogram, honestly weighed, delivered back in 24 hours.",
+    heroBullets: ["₦1,200 per kilogram", "24h standard turnaround", "Retail-standard folding"],
     sections: [
       {
         title: "Sorted like we own it",
@@ -188,14 +188,14 @@ export const serviceContent: Record<string, ServiceContent> = {
       },
     ],
     features: [
-      { title: "By the pound", body: "Weighed at the facility, charged after — never before." },
+      { title: "By the kilogram", body: "Weighed at the facility, charged after — never before." },
       { title: "Preference profiles", body: "Detergent, temperature, and folding saved per customer." },
       { title: "Hang-dry lists", body: "Flag delicates once; we hang-dry them on every order." },
       { title: "Stain pre-treatment", body: "Point out stains at pickup and we treat them free." },
       { title: "Sealed packaging", body: "Recyclable, tamper-evident bags with order barcodes." },
       { title: "24h turnaround", body: "Standard next-day; express and same-day available." },
     ],
-    pricingNote: "$1.75/lb with a 10 lb minimum · recurring orders save 10% · Lustra+ includes 40 lbs monthly",
+    pricingNote: "₦1,200/kg with a 4 kg minimum · recurring orders save 10% · Lustra+ includes 25 kg monthly",
     cta: { title: "Try wash & fold for 20% off", body: "First order code FRESH20 — feel the fold difference once and you're done doing laundry." },
     faqs: [
       { q: "How do you handle delicates mixed into a wash & fold bag?", a: "Intake teams flag anything with a delicate care label and route it to gentle cycles or hang-dry automatically. For guaranteed handling, add items to your hang-dry list in preferences." },
@@ -209,7 +209,7 @@ export const serviceContent: Record<string, ServiceContent> = {
     headline: "Crisp is a feeling",
     intro:
       "Professional pressing for shirts, trousers, dresses, and linens — steam-finished on commercial equipment, returned on hangers or folded flat. Starch level saved to your profile.",
-    heroBullets: ["From $3.50 per shirt", "Steam finishing, never scorched", "On hangers or boxed flat"],
+    heroBullets: ["From ₦1,200 per shirt", "Steam finishing, never scorched", "On hangers or boxed flat"],
     sections: [
       {
         title: "Pressed by people, finished by steam",
@@ -221,12 +221,12 @@ export const serviceContent: Record<string, ServiceContent> = {
       },
     ],
     features: [
-      { title: "Shirt service", body: "Wash and press from $3.50 per shirt in volume." },
+      { title: "Shirt service", body: "Wash and press from ₦1,200 per shirt in volume." },
       { title: "Linens & table settings", body: "Tablecloths and napkins pressed for events." },
       { title: "Hanger or flat-pack", body: "Closet-ready or suitcase-ready, your choice." },
       { title: "Same-day option", body: "Morning drop, evening wear." },
     ],
-    pricingNote: "Shirts from $3.50 · trousers $6 · dresses from $9 · bundles of 10+ save 15%",
+    pricingNote: "Shirts from ₦1,200 · trousers ₦1,800 · dresses from ₦2,500 · bundles of 10+ save 15%",
     cta: { title: "Never iron again", body: "Add pressing to any pickup order in one tap." },
     faqs: [
       { q: "Do you press only, without cleaning?", a: "Yes — press-only service is available for garments that are clean but crumpled, at roughly 60% of the clean-and-press price." },
@@ -239,7 +239,7 @@ export const serviceContent: Record<string, ServiceContent> = {
     headline: "For the pieces that matter",
     intro:
       "Vintage, couture, heirloom textiles, costumes, and anything the care label gave up on. Our specialty studio treats one garment at a time, with documentation at every step.",
-    heroBullets: ["Item-level insurance to $1,000", "One-garment-at-a-time processing", "Photographic documentation"],
+    heroBullets: ["Item-level insurance to ₦500,000", "One-garment-at-a-time processing", "Photographic documentation"],
     sections: [
       {
         title: "Assessment before commitment",
@@ -322,8 +322,8 @@ export const serviceContent: Record<string, ServiceContent> = {
       { title: "Starch to your spec", body: "From soft drape to ceremonial crisp — saved to your profile." },
       { title: "Heirloom preservation", body: "Acid-free boxing for wedding and family-heritage pieces." },
     ],
-    pricingNote: "Agbada sets from $35 · Aso-Oke/gele from $18 · Ankara garments from $9 · assessed pieces quoted free",
-    cta: { title: "Bring us the garments that matter most", body: "Free pickup on traditional attire orders over $25 — photographed at intake, returned like new." },
+    pricingNote: "Agbada sets from ₦12,000 · Aso-Oke/gele from ₦6,000 · Ankara garments from ₦3,000 · assessed pieces quoted free",
+    cta: { title: "Bring us the garments that matter most", body: "Free pickup on traditional attire orders over ₦20,000 — photographed at intake, returned like new." },
     faqs: [
       { q: "Can you clean heavily embroidered or stoned lace?", a: "Yes — embellished lace goes through the couture studio: stones and beadwork are inspected and secured, then the garment is hand-cleaned face-down on padded mesh. Anything at risk is flagged with you before we proceed." },
       { q: "Will dry cleaning fade my Ankara?", a: "Conventional solvent cleaning can. We colorfast-test every wax print and route it to a pH-balanced wet-clean process designed for reactive and wax-resist dyes, so the color stays saturated." },
@@ -337,28 +337,28 @@ export const serviceContent: Record<string, ServiceContent> = {
     headline: "Laundry on autopilot",
     intro:
       "A flat monthly price, a recurring pickup, and a life where clean laundry simply appears. Pause anytime, roll over what you don't use, and save on everything else.",
-    heroBullets: ["From $49/month", "Rollover unused pounds", "Pause or cancel anytime"],
+    heroBullets: ["From ₦35,000/month", "Rollover unused kilograms", "Pause or cancel anytime"],
     sections: [
       {
         title: "Pick a plan, forget the chore",
-        body: "Lustra+ covers a typical one-to-two-person household (40 lbs/month); Family covers big households (90 lbs). Both include free pickup & delivery, member discounts on machines and dry cleaning, and multiplied loyalty points.",
+        body: "Lustra+ covers a typical one-to-two-person household (25 kg/month); Family covers big households (55 kg). Both include free pickup & delivery, member discounts on machines and dry cleaning, and multiplied loyalty points.",
       },
       {
         title: "Fair by design",
-        body: "Unused pounds roll over (up to half your plan), extra pounds bill at member rates, and pausing for travel takes one tap. Subscriptions that respect you are the only kind worth selling.",
+        body: "Unused kilograms roll over (up to half your plan), extra kilograms bill at member rates, and pausing for travel takes one tap. Subscriptions that respect you are the only kind worth selling.",
       },
     ],
     features: [
-      { title: "Included pounds", body: "40 or 90 lbs of wash & fold every month." },
+      { title: "Included kilograms", body: "25 or 55 kg of wash & fold every month." },
       { title: "Member discounts", body: "15–20% off machines and dry cleaning." },
       { title: "Rollover", body: "Keep up to half your unused pounds each month." },
       { title: "Priority turnaround", body: "24h standard, same-day credits on Family." },
     ],
-    pricingNote: "Lustra+ $49/mo · Family $89/mo · commercial subscriptions quoted separately",
+    pricingNote: "Lustra+ ₦35,000/mo · Family ₦60,000/mo · commercial subscriptions quoted separately",
     cta: { title: "Start with a free month of Essential", body: "Earn points from your first order and upgrade whenever the math makes sense." },
     faqs: [
-      { q: "What happens to unused pounds?", a: "Up to 50% of your monthly allowance rolls into the next month automatically. Beyond that, we'd rather you downgrade than pay for laundry that doesn't exist — the app will suggest it." },
-      { q: "Can I share a plan?", a: "Family plans cover one household at one address, with up to two pickup addresses (great for students). Additional addresses can be added for $10/month." },
+      { q: "What happens to unused kilograms?", a: "Up to 50% of your monthly allowance rolls into the next month automatically. Beyond that, we'd rather you downgrade than pay for laundry that doesn't exist — the app will suggest it." },
+      { q: "Can I share a plan?", a: "Family plans cover one household at one address, with up to two pickup addresses (great for students). Additional addresses can be added for ₦5,000/month." },
     ],
   },
 };

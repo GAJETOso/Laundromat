@@ -22,8 +22,8 @@ import { washFoldPricing } from "@/lib/data";
 import { cn, formatCurrency } from "@/lib/utils";
 
 const serviceOptions = [
-  { id: "Wash & Fold Pickup", icon: Truck, blurb: "We collect, clean & deliver — $1.75/lb", badge: "Most popular" },
-  { id: "Dry Cleaning Pickup", icon: Sparkles, blurb: "Suits, dresses, delicates — from $7/garment" },
+  { id: "Wash & Fold Pickup", icon: Truck, blurb: "We collect, clean & deliver — ₦1,200/kg", badge: "Most popular" },
+  { id: "Dry Cleaning Pickup", icon: Sparkles, blurb: "Suits, agbada, delicates — from ₦2,500/garment" },
   { id: "Self-Service Reservation", icon: WashingMachine, blurb: "Reserve a washer or dryer at any location" },
   { id: "Commercial Consultation", icon: Building2, blurb: "Volume laundry for your business" },
 ];
@@ -41,7 +41,7 @@ const preferenceOptions = [
   "Scent-free",
 ];
 
-const paymentMethods = ["Card (Stripe)", "PayPal", "Apple Pay", "Google Pay", "Lustra Wallet"];
+const paymentMethods = ["Paystack (Card)", "Flutterwave", "Bank Transfer", "USSD", "Lustra Wallet"];
 
 const steps = [
   { label: "Service", icon: Sparkles },
@@ -65,12 +65,12 @@ export function BookingWizard() {
     email: "",
     phone: "",
     address: "",
-    city: "Austin",
+    city: "Lagos",
     zip: "",
     date: "",
     window: windows[1],
     recurring: recurringOptions[0],
-    weightLbs: 15,
+    weightKg: 8,
     preferences: [] as string[],
     instructions: "",
     payment: paymentMethods[0],
@@ -88,14 +88,14 @@ export function BookingWizard() {
 
   const estimate = useMemo(() => {
     if (!form.service.includes("Wash & Fold")) return null;
-    const lbs = Math.max(form.weightLbs, washFoldPricing.minimumLbs);
-    let total = lbs * washFoldPricing.perLb;
+    const kg = Math.max(form.weightKg, washFoldPricing.minimumKg);
+    let total = kg * washFoldPricing.perKg;
     for (const addon of washFoldPricing.addOns) {
       if (form.preferences.includes(addon.label)) total += addon.price;
     }
     if (form.promo.trim().toUpperCase() === "FRESH20") total *= 0.8;
     return total;
-  }, [form.service, form.weightLbs, form.preferences, form.promo]);
+  }, [form.service, form.weightKg, form.preferences, form.promo]);
 
   function validStep(): string {
     switch (step) {
@@ -269,7 +269,7 @@ export function BookingWizard() {
                   </div>
                   <div>
                     <label htmlFor="bk-phone" className="label">Phone</label>
-                    <input id="bk-phone" className="input" type="tel" autoComplete="tel" value={form.phone} onChange={(e) => set("phone", e.target.value)} placeholder="+1 (555) 000-0000" />
+                    <input id="bk-phone" className="input" type="tel" autoComplete="tel" value={form.phone} onChange={(e) => set("phone", e.target.value)} placeholder="+234 800 000 0000" />
                   </div>
                 </div>
                 <div>
@@ -278,7 +278,7 @@ export function BookingWizard() {
                 </div>
                 <div>
                   <label htmlFor="bk-address" className="label">Street address</label>
-                  <input id="bk-address" className="input" autoComplete="street-address" value={form.address} onChange={(e) => set("address", e.target.value)} placeholder="1200 Meridian Avenue, Apt 4B" />
+                  <input id="bk-address" className="input" autoComplete="street-address" value={form.address} onChange={(e) => set("address", e.target.value)} placeholder="14 Admiralty Way, Lekki Phase 1" />
                 </div>
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
@@ -286,8 +286,8 @@ export function BookingWizard() {
                     <input id="bk-city" className="input" value={form.city} onChange={(e) => set("city", e.target.value)} />
                   </div>
                   <div>
-                    <label htmlFor="bk-zip" className="label">ZIP code</label>
-                    <input id="bk-zip" className="input" autoComplete="postal-code" value={form.zip} onChange={(e) => set("zip", e.target.value)} placeholder="78701" />
+                    <label htmlFor="bk-zip" className="label">Area / Estate</label>
+                    <input id="bk-zip" className="input" value={form.zip} onChange={(e) => set("zip", e.target.value)} placeholder="Lekki Phase 1" />
                   </div>
                 </div>
                 <p className="text-xs text-muted">
@@ -362,16 +362,16 @@ export function BookingWizard() {
                 {form.service.includes("Wash & Fold") && (
                   <div className="mt-6">
                     <label htmlFor="bk-weight" className="label">
-                      Estimated weight: <strong>{form.weightLbs} lbs</strong>
-                      <span className="ml-2 font-normal normal-case text-muted">(a kitchen trash bag ≈ 12–15 lbs)</span>
+                      Estimated weight: <strong>{form.weightKg} kg</strong>
+                      <span className="ml-2 font-normal normal-case text-muted">(a full laundry basket ≈ 5–7 kg)</span>
                     </label>
                     <input
                       id="bk-weight"
                       type="range"
-                      min={washFoldPricing.minimumLbs}
-                      max={80}
-                      value={form.weightLbs}
-                      onChange={(e) => set("weightLbs", Number(e.target.value))}
+                      min={washFoldPricing.minimumKg}
+                      max={40}
+                      value={form.weightKg}
+                      onChange={(e) => set("weightKg", Number(e.target.value))}
                       className="w-full accent-aqua-500"
                     />
                   </div>
@@ -484,7 +484,7 @@ export function BookingWizard() {
 
                 <p className="mt-5 text-xs text-muted">
                   🔒 You&apos;re charged after your laundry is weighed at the facility — never before.
-                  Payments are processed by Stripe; card details never touch our servers.
+                  Payments are processed by Paystack and Flutterwave; card details never touch our servers.
                 </p>
               </fieldset>
             )}

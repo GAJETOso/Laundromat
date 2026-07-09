@@ -3,14 +3,14 @@ import { demoUser } from "@/lib/demo-account";
 import { formatCurrency } from "@/lib/utils";
 
 const tiers = [
-  { name: "Fresh", threshold: "0 pts", perks: "1 pt / $1 · birthday wash free" },
-  { name: "Silver", threshold: "1,000 pts", perks: "1.25 pts / $1 · free express upgrade monthly" },
-  { name: "Platinum", threshold: "2,500 pts", perks: "1.5 pts / $1 · priority slots · surprise perks" },
+  { name: "Fresh", threshold: "0 pts", perks: "1 pt / ₦100 · birthday wash free" },
+  { name: "Silver", threshold: "1,000 pts", perks: "1.25 pts / ₦100 · free express upgrade monthly" },
+  { name: "Platinum", threshold: "2,500 pts", perks: "1.5 pts / ₦100 · priority slots · surprise perks" },
 ];
 
 const redemptions = [
-  { label: "$5 order credit", cost: "500 pts" },
-  { label: "Free 15 lb wash & fold", cost: "1,800 pts" },
+  { label: "₦500 order credit", cost: "500 pts" },
+  { label: "Free 5 kg wash & fold", cost: "1,800 pts" },
   { label: "Express upgrade", cost: "700 pts" },
   { label: "Dry cleaning: 2 garments", cost: "1,400 pts" },
 ];
@@ -21,7 +21,7 @@ export default function RewardsPage() {
       <div className="card bg-cta-gradient p-8 text-white">
         <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/70">Loyalty balance</p>
         <p className="mt-2 font-display text-5xl font-bold">{demoUser.points.toLocaleString()} pts</p>
-        <p className="mt-1 text-sm text-white/80">≈ {formatCurrency(demoUser.points / 100)} in credit · Silver tier, 50 pts from Platinum</p>
+        <p className="mt-1 text-sm text-white/80">≈ {formatCurrency(demoUser.points)} in credit · Silver tier, 50 pts from Platinum</p>
         <div className="mt-5 h-2 overflow-hidden rounded-full bg-white/25">
           <div className="h-full w-[98%] rounded-full bg-white" />
         </div>

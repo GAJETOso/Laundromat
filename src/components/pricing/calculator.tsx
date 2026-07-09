@@ -13,19 +13,19 @@ const speeds = [
 ];
 
 export function PriceCalculator() {
-  const [lbs, setLbs] = useState(15);
+  const [kg, setKg] = useState(8);
   const [speed, setSpeed] = useState(speeds[0]);
   const [addOns, setAddOns] = useState<string[]>([]);
 
   const breakdown = useMemo(() => {
-    const effectiveLbs = Math.max(lbs, washFoldPricing.minimumLbs);
-    const base = effectiveLbs * washFoldPricing.perLb;
+    const effectiveKg = Math.max(kg, washFoldPricing.minimumKg);
+    const base = effectiveKg * washFoldPricing.perKg;
     const addOnTotal = washFoldPricing.addOns
       .filter((a) => addOns.includes(a.id))
       .reduce((sum, a) => sum + a.price, 0);
     const subtotal = base * speed.multiplier + addOnTotal;
-    return { base, addOnTotal, total: subtotal, effectiveLbs };
-  }, [lbs, speed, addOns]);
+    return { base, addOnTotal, total: subtotal, effectiveKg };
+  }, [kg, speed, addOns]);
 
   return (
     <div className="card grid gap-0 overflow-hidden lg:grid-cols-[1.4fr_1fr]">
@@ -37,21 +37,21 @@ export function PriceCalculator() {
 
         <div className="mt-8">
           <label htmlFor="calc-weight" className="label">
-            Load weight: <strong>{lbs} lbs</strong>
-            <span className="ml-2 font-normal normal-case text-muted">(a full kitchen trash bag ≈ 12–15 lbs)</span>
+            Load weight: <strong>{kg} kg</strong>
+            <span className="ml-2 font-normal normal-case text-muted">(a full laundry basket ≈ 5–7 kg)</span>
           </label>
           <input
             id="calc-weight"
             type="range"
-            min={5}
-            max={100}
-            value={lbs}
-            onChange={(e) => setLbs(Number(e.target.value))}
+            min={2}
+            max={50}
+            value={kg}
+            onChange={(e) => setKg(Number(e.target.value))}
             className="w-full accent-aqua-500"
           />
           <div className="mt-1 flex justify-between text-xs text-muted">
-            <span>5 lbs</span>
-            <span>100 lbs</span>
+            <span>2 kg</span>
+            <span>50 kg</span>
           </div>
         </div>
 
@@ -113,7 +113,7 @@ export function PriceCalculator() {
           <p className="mt-4 font-display text-6xl font-bold">{formatCurrency(breakdown.total)}</p>
           <dl className="mt-8 space-y-3 text-sm text-ink-200/80">
             <div className="flex justify-between">
-              <dt>{breakdown.effectiveLbs} lbs × {formatCurrency(washFoldPricing.perLb)}</dt>
+              <dt>{breakdown.effectiveKg} kg × {formatCurrency(washFoldPricing.perKg)}</dt>
               <dd>{formatCurrency(breakdown.base)}</dd>
             </div>
             {speed.multiplier > 1 && (
@@ -134,7 +134,7 @@ export function PriceCalculator() {
             </div>
           </dl>
           <p className="mt-6 text-xs text-ink-200/60">
-            Final price is set when your laundry is weighed at the facility. {washFoldPricing.minimumLbs} lb minimum
+            Final price is set when your laundry is weighed at the facility. {washFoldPricing.minimumKg} kg minimum
             applies. Lustra+ members save 15%.
           </p>
         </div>

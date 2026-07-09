@@ -1,9 +1,12 @@
 # Lustra — Laundry, elevated. 🧺
 
-A premium, production-grade laundry platform: smart self-service laundromats,
-pickup & delivery, commercial/B2B linen programs, and couture dry cleaning —
-one unified Next.js application with customer, admin, and driver dashboards
-and an AI assistant available on web, WhatsApp, and Telegram.
+A premium, production-grade laundry platform positioned for the Nigerian
+market: smart self-service laundromats across Lagos (Lekki, Victoria Island,
+Yaba), pickup & delivery, commercial/B2B linen programs, couture dry cleaning,
+and a traditional & cultural attire studio — one unified Next.js application
+with customer, admin, and driver dashboards and an AI assistant available on
+web, WhatsApp, and Telegram. Pricing is in Naira (₦), units are metric (kg),
+payments lead with Paystack & Flutterwave, and privacy follows the NDPA 2023.
 
 ![Stack](https://img.shields.io/badge/Next.js%2014-black) ![TS](https://img.shields.io/badge/TypeScript-strict-blue) ![Tailwind](https://img.shields.io/badge/Tailwind%20CSS-3-38bdf8) ![License](https://img.shields.io/badge/license-proprietary-lightgrey)
 

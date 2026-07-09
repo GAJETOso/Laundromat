@@ -22,7 +22,10 @@ export const metadata: Metadata = {
     "dry cleaning",
     "commercial laundry",
     "self-service laundry",
-    "Austin laundry",
+    "laundry Lagos",
+    "laundromat Lekki",
+    "dry cleaning Victoria Island",
+    "laundry pickup Lagos",
   ],
   openGraph: {
     siteName: site.name,

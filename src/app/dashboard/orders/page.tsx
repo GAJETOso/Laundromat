@@ -38,7 +38,7 @@ export default function OrdersPage() {
               <td className="py-4 pr-4 font-mono text-xs font-semibold">{o.id}</td>
               <td className="py-4 pr-4 font-medium">
                 {o.service}
-                {o.weightLbs ? <span className="text-muted"> · {o.weightLbs} lbs</span> : null}
+                {o.weightKg ? <span className="text-muted"> · {o.weightKg} kg</span> : null}
               </td>
               <td className="py-4 pr-4 text-muted">
                 {new Date(o.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}

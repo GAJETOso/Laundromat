@@ -19,7 +19,7 @@ Query params:
 
 | Param      | Type   | Description                                   |
 | ---------- | ------ | --------------------------------------------- |
-| `location` | string | Filter to one location id (`downtown`, `midtown`, `university`) |
+| `location` | string | Filter to one location id (`lekki`, `victoria-island`, `yaba`) |
 | `summary`  | `1`    | Return per-location availability counts only  |
 
 `200` response (`summary=1`):
@@ -27,7 +27,7 @@ Query params:
 ```json
 {
   "summary": {
-    "downtown": { "washersAvailable": 9, "washersTotal": 24, "dryersAvailable": 7, "dryersTotal": 20 }
+    "lekki": { "washersAvailable": 9, "washersTotal": 24, "dryersAvailable": 7, "dryersTotal": 20 }
   },
   "updatedAt": "2026-07-07T15:04:05.000Z"
 }
@@ -37,13 +37,13 @@ Query params:
 
 ```json
 {
-  "id": "DOW-W07",
-  "locationId": "downtown",
+  "id": "LEK-W07",
+  "locationId": "lekki",
   "type": "washer",
-  "capacityLbs": 20,
+  "capacityKg": 12,
   "status": "running",
   "minutesRemaining": 18,
-  "pricePerCycle": 4.75
+  "pricePerCycle": 3500
 }
 ```
 
@@ -126,7 +126,7 @@ Body `{ "message": string }` (≤ 1000 chars). Returns `{ "reply": string }`.
 
 Rate limited to 30 requests/minute/IP (in-memory here; Redis in production).
 The same engine (`src/lib/assistant.ts`) answers the WhatsApp and Telegram
-webhooks. Intents implemented: pricing (with per-lb estimation), booking,
+webhooks. Intents implemented: pricing (with per-kg estimation), booking,
 machine availability (live), order tracking, locations, hours, memberships,
 commercial, stain advice, cancellation, human handoff, promotions, plus an
 FAQ-similarity fallback.

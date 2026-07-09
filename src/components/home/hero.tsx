@@ -146,7 +146,7 @@ export function Hero() {
           >
             <p className="text-xs text-muted">Loyalty balance</p>
             <p className="font-display text-2xl font-bold">2,450 pts</p>
-            <p className="text-xs font-semibold text-emerald-500">≈ $24.50 credit</p>
+            <p className="text-xs font-semibold text-emerald-500">≈ ₦2,450 credit</p>
           </div>
         </motion.div>
       </div>

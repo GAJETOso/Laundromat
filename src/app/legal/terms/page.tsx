@@ -34,7 +34,7 @@ const sections = [
   },
   {
     title: "7. Disputes",
-    body: `We want to fix problems, not litigate them — contact ${site.supportEmail} first. Unresolved disputes are governed by the laws of Texas and resolved in the courts of Travis County, or small-claims court where eligible.`,
+    body: `We want to fix problems, not litigate them — contact ${site.supportEmail} first. Unresolved disputes are governed by the laws of the Federal Republic of Nigeria and resolved in the courts of Lagos State, or through small-claims procedures where eligible.`,
   },
 ];
 

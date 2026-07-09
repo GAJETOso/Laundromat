@@ -34,6 +34,7 @@ export async function GET() {
         phone: site.phone,
         email: site.supportEmail,
       },
+      locale: { currency: "NGN", country: "NG", language: "en-NG", units: "metric" },
       theme: {
         accentLight: "#06b6d4",
         accentDark: "#22d3ee",

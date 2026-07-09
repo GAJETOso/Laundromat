@@ -18,11 +18,11 @@ type Intent = {
 };
 
 function priceEstimate(text: string): string | null {
-  const lbs = text.match(/(\d+(?:\.\d+)?)\s*(?:lb|lbs|pound)/i);
-  if (!lbs) return null;
-  const weight = Math.max(parseFloat(lbs[1]), washFoldPricing.minimumLbs);
-  const total = (weight * washFoldPricing.perLb).toFixed(2);
-  return `For ${lbs[1]} lbs of wash & fold: about $${total} (at $${washFoldPricing.perLb}/lb, ${washFoldPricing.minimumLbs} lb minimum). Express is 1.5×, same-day 2×. Want me to start a booking? Just say "book a pickup".`;
+  const kg = text.match(/(\d+(?:\.\d+)?)\s*(?:kg|kgs|kilo|kilogram)/i);
+  if (!kg) return null;
+  const weight = Math.max(parseFloat(kg[1]), washFoldPricing.minimumKg);
+  const total = (weight * washFoldPricing.perKg).toLocaleString("en-NG");
+  return `For ${kg[1]} kg of wash & fold: about ₦${total} (at ₦${washFoldPricing.perKg.toLocaleString("en-NG")}/kg, ${washFoldPricing.minimumKg} kg minimum). Express is 1.5×, same-day 2×. Want me to start a booking? Just say "book a pickup".`;
 }
 
 const intents: Intent[] = [
@@ -32,14 +32,14 @@ const intents: Intent[] = [
       const estimate = priceEstimate(text);
       if (estimate) return estimate;
       if (/dry\s*clean|suit|dress|coat|leather|silk/i.test(text)) {
-        const items = dryCleaningPricing.slice(0, 6).map((i) => `• ${i.item}: $${i.price}`).join("\n");
-        return `Dry cleaning starts at $7 per garment:\n${items}\n\nFull list at ${site.url}/pricing. Express 6-hour service is +50%.`;
+        const items = dryCleaningPricing.slice(0, 6).map((i) => `• ${i.item}: ₦${i.price.toLocaleString("en-NG")}`).join("\n");
+        return `Dry cleaning starts at ₦2,500 per garment:\n${items}\n\nFull list at ${site.url}/pricing. Express 6-hour service is +50%.`;
       }
       if (/machine|washer|dryer|self.?service/i.test(text)) {
-        const rows = machinePricing.slice(0, 4).map((m) => `• ${m.machine}: $${m.price}`).join("\n");
+        const rows = machinePricing.slice(0, 4).map((m) => `• ${m.machine}: ₦${m.price.toLocaleString("en-NG")}`).join("\n");
         return `Self-service machine pricing:\n${rows}\n\nMembers save 15–20%. Try the calculator at ${site.url}/pricing.`;
       }
-      return `Wash & fold is $${washFoldPricing.perLb}/lb (${washFoldPricing.minimumLbs} lb minimum) with free pickup & delivery. Tell me roughly how many pounds — e.g. "price for 15 lbs" — and I'll estimate your total. Machines from $3.50/wash, dry cleaning from $7/garment.`;
+      return `Wash & fold is ₦${washFoldPricing.perKg.toLocaleString("en-NG")}/kg (${washFoldPricing.minimumKg} kg minimum) with free pickup & delivery. Tell me roughly how many kilograms — e.g. "price for 8 kg" — and I'll estimate your total. Machines from ₦2,500/wash, dry cleaning from ₦2,500/garment.`;
     },
   },
   {
@@ -66,29 +66,29 @@ const intents: Intent[] = [
   {
     match: /(wedding|bridal|gown)/i,
     reply: () =>
-      `Wedding dresses are handled in our couture studio: UV stain mapping, hand cleaning, and museum-grade preservation boxing for $189. Turnaround is 10–14 days, and we photograph every stage. Book at ${site.url}/services/dry-cleaning or reply "book" and we'll arrange collection.`,
+      `Wedding dresses are handled in our couture studio: UV stain mapping, hand cleaning, and museum-grade preservation boxing for ₦85,000. Turnaround is 10–14 days, and we photograph every stage. Book at ${site.url}/services/dry-cleaning or reply "book" and we'll arrange collection.`,
   },
   {
     match: /(location|address|where|near|find.*(store|laundromat))/i,
     reply: () => {
       const lines = locations.map((l) => `• ${l.name} — ${l.address}, ${l.city} (${l.hours})`);
-      return `We have ${locations.length} Austin locations:\n${lines.join("\n")}\n\nDetails, parking, and live machine counts: ${site.url}/locations`;
+      return `We have ${locations.length} Lagos locations:\n${lines.join("\n")}\n\nDetails, parking, and live machine counts: ${site.url}/locations`;
     },
   },
   {
     match: /(hour|open|close|when)/i,
     reply: () =>
-      `Downtown & University District: 6 AM – 11 PM (University until 1 AM). Midtown never closes — it's open 24 hours. Pickup & delivery windows run 7 AM – 9 PM daily.`,
+      `Lekki: 6 AM – 11 PM. Yaba: 6 AM – 1 AM. Victoria Island never closes — it's open 24 hours. Pickup & delivery windows run 7 AM – 9 PM daily.`,
   },
   {
     match: /(member|subscription|plan|loyalty|point|reward)/i,
     reply: () =>
-      `Membership tiers:\n• Essential — free, 1 pt per $1\n• Lustra+ — $49/mo: 40 lbs included, 15% off everything, priority 24h turnaround, 2× points\n• Family — $89/mo: 90 lbs, 20% off, same-day twice a month, 3× points\n\n100 points = $1 credit, redeemable on anything. Details: ${site.url}/pricing`,
+      `Membership tiers:\n• Essential — free, 1 pt per ₦100\n• Lustra+ — ₦35,000/mo: 25 kg included, 15% off everything, priority 24h turnaround, 2× points\n• Family — ₦60,000/mo: 55 kg, 20% off, same-day twice a month, 3× points\n\n1 point = ₦1 credit, redeemable on anything. Details: ${site.url}/pricing`,
   },
   {
     match: /(commercial|business|hotel|restaurant|airbnb|b2b|bulk|volume|enterprise)/i,
     reply: () =>
-      `Our commercial program covers hotels, restaurants, clinics, gyms, salons, schools, and Airbnb operators — SLA-backed turnaround, route pickups, dedicated account manager, and monthly invoicing. Request a quote at ${site.url}/commercial and we'll respond within one business day.`,
+      `Our commercial program covers hotels, restaurants, clinics, gyms, salons, schools, and shortlet operators — SLA-backed turnaround, route pickups, dedicated account manager, and monthly invoicing. Request a quote at ${site.url}/commercial and we'll respond within one business day.`,
   },
   {
     match: /(stain|spill|wine|blood|ink|coffee)/i,
@@ -103,17 +103,17 @@ const intents: Intent[] = [
   {
     match: /(human|agent|person|support|help|complain|problem|refund|damage)/i,
     reply: () =>
-      `I'll connect you with the care team right away. Fastest options:\n• WhatsApp: wa.me/${site.whatsapp.replace(/\D/g, "")}\n• Phone: ${site.phone} (7 AM – 10 PM)\n• Email: ${site.supportEmail}\n\nFor damage or missing-item claims: report within 7 days and we resolve within 48 hours — garments are insured up to $1,000 per item.`,
+      `I'll connect you with the care team right away. Fastest options:\n• WhatsApp: wa.me/${site.whatsapp.replace(/\D/g, "")}\n• Phone: ${site.phone} (7 AM – 10 PM)\n• Email: ${site.supportEmail}\n\nFor damage or missing-item claims: report within 7 days and we resolve within 48 hours — garments are insured up to ₦500,000 per item.`,
   },
   {
     match: /(student|discount|promo|coupon|code|offer)/i,
     reply: () =>
-      `Current offers:\n• FRESH20 — 20% off your first pickup & delivery order\n• Student discount — 15% off self-service with a valid student ID (University District)\n• Off-peak points — 2× loyalty points on weekday mornings\n\nPromo codes apply at checkout on ${site.url}/book.`,
+      `Current offers:\n• FRESH20 — 20% off your first pickup & delivery order\n• Student discount — 15% off self-service with a valid student ID (Lustra Yaba)\n• Off-peak points — 2× loyalty points on weekday mornings\n\nPromo codes apply at checkout on ${site.url}/book.`,
   },
   {
     match: /(hi|hello|hey|good\s*(morning|afternoon|evening)|start)/i,
     reply: () =>
-      `Hello! I'm Lumi, Lustra's laundry assistant. I can help you:\n• Get a price estimate ("price for 15 lbs")\n• Book or reschedule a pickup\n• Check live machine availability\n• Track an order\n• Answer fabric-care questions\n\nWhat would you like to do?`,
+      `Hello! I'm Lumi, Lustra's laundry assistant. I can help you:\n• Get a price estimate ("price for 8 kg")\n• Book or reschedule a pickup\n• Check live machine availability\n• Track an order\n• Answer fabric-care questions\n\nWhat would you like to do?`,
   },
 ];
 

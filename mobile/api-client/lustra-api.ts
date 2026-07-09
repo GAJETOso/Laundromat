@@ -13,7 +13,7 @@ export type Machine = {
   id: string;
   locationId: string;
   type: "washer" | "dryer";
-  capacityLbs: number;
+  capacityKg: number;
   status: MachineStatus;
   minutesRemaining: number | null;
   pricePerCycle: number;
@@ -66,6 +66,7 @@ export type AppConfig = {
   storeLinks: { appStore: string; playStore: string };
   featureFlags: Record<string, boolean>;
   support: { whatsapp: string; telegram: string; phone: string; email: string };
+  locale: { currency: string; country: string; language: string; units: string };
   theme: { accentLight: string; accentDark: string; ctaGradient: [string, string] };
 };
 

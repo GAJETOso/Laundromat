@@ -34,7 +34,7 @@ export default function DashboardOverview() {
             <Gift className="h-4 w-4 text-aqua-500" aria-hidden /> Points
           </p>
           <p className="mt-2 font-display text-3xl font-bold">{demoUser.points.toLocaleString()}</p>
-          <p className="text-xs font-semibold text-emerald-500">≈ {formatCurrency(demoUser.points / 100)} credit</p>
+          <p className="text-xs font-semibold text-emerald-500">≈ {formatCurrency(demoUser.points)} credit</p>
         </div>
         <div className="card p-6">
           <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-muted">
@@ -50,7 +50,7 @@ export default function DashboardOverview() {
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/70">Your plan</p>
           <p className="mt-1 font-display text-2xl font-bold">{demoUser.plan}</p>
-          <p className="mt-1 text-sm text-white/80">28 of 40 lbs used this month · 12 lbs roll over</p>
+          <p className="mt-1 text-sm text-white/80">17 of 25 kg used this month · 8 kg roll over</p>
         </div>
         <div className="w-full max-w-xs">
           <div className="h-2 overflow-hidden rounded-full bg-white/25">
@@ -78,7 +78,7 @@ export default function DashboardOverview() {
                 <p className="font-semibold">{o.service}</p>
                 <p className="text-xs text-muted">
                   {o.id} · {new Date(o.date).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
-                  {o.weightLbs ? ` · ${o.weightLbs} lbs` : ""}
+                  {o.weightKg ? ` · ${o.weightKg} kg` : ""}
                 </p>
               </div>
               <span className={cn("chip", statusStyles[o.status])}>{statusLabels[o.status]}</span>

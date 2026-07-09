@@ -15,7 +15,7 @@ const industries = [
   "Other",
 ];
 
-const volumes = ["Under 100 lbs / week", "100–300 lbs / week", "300–1,000 lbs / week", "1,000+ lbs / week"];
+const volumes = ["Under 50 kg / week", "50–150 kg / week", "150–500 kg / week", "500+ kg / week"];
 
 export function QuoteForm() {
   const [form, setForm] = useState({

@@ -3,7 +3,7 @@ import { site } from "@/lib/site";
 
 export const metadata = buildMetadata({
   title: "Privacy Policy",
-  description: "How Lustra collects, uses, and protects your personal data — GDPR and CCPA aligned.",
+  description: "How Lustra collects, uses, and protects your personal data — NDPA (Nigeria) and GDPR aligned.",
   path: "/legal/privacy",
 });
 
@@ -18,11 +18,11 @@ const sections = [
   },
   {
     title: "3. Sharing",
-    body: "Data is shared only with processors necessary to run the service: payment providers (Stripe, PayPal, Paystack, Flutterwave), messaging providers (Twilio, Meta WhatsApp Business, Telegram), mapping (Google Maps), and cloud infrastructure (Vercel, Supabase, Cloudinary). Each is bound by a data processing agreement.",
+    body: "Data is shared only with processors necessary to run the service: payment providers (Paystack, Flutterwave, Stripe, PayPal), messaging providers (Twilio, Meta WhatsApp Business, Telegram), mapping (Google Maps), and cloud infrastructure (Vercel, Supabase, Cloudinary). Each is bound by a data processing agreement.",
   },
   {
-    title: "4. Your rights (GDPR & CCPA)",
-    body: `You may access, correct, export, or delete your data at any time from Dashboard → Settings → Security, or by emailing ${site.supportEmail}. We respond to verified requests within 30 days. California residents may additionally opt out of "sharing" as defined by the CCPA; we honor Global Privacy Control signals.`,
+    title: "4. Your rights (NDPA & GDPR)",
+    body: `You may access, correct, export, or delete your data at any time from Dashboard → Settings → Security, or by emailing ${site.supportEmail}. We respond to verified requests within 30 days, as required by the Nigeria Data Protection Act 2023 (NDPA), and we honour equivalent rights under the GDPR for customers abroad. Complaints may also be directed to the Nigeria Data Protection Commission.`,
   },
   {
     title: "5. Retention & security",

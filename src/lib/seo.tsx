@@ -95,7 +95,7 @@ export function serviceJsonLd(name: string, description: string, path: string) {
     description,
     url: `${site.url}${path}`,
     provider: { "@id": `${site.url}/#business` },
-    areaServed: { "@type": "City", name: "Austin" },
+    areaServed: { "@type": "City", name: "Lagos" },
   };
 }
 

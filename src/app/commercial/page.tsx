@@ -8,7 +8,7 @@ import { buildMetadata, JsonLd, breadcrumbJsonLd } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Commercial Laundry for Hotels, Restaurants, Clinics & Hosts",
   description:
-    "SLA-backed commercial laundry with volume pricing, route pickups, dedicated account management, and a live enterprise dashboard. Serving hotels, restaurants, healthcare, gyms, salons, schools, and Airbnb operators.",
+    "SLA-backed commercial laundry in Lagos with volume pricing, route pickups, dedicated account management, and a live enterprise dashboard. Serving hotels, restaurants, healthcare, gyms, salons, schools, and shortlet operators.",
   path: "/commercial",
 });
 
@@ -16,7 +16,7 @@ const industries = [
   { icon: Hotel, name: "Hotels", blurb: "Linen programs with nightly routes and peak-season surge capacity." },
   { icon: Utensils, name: "Restaurants", blurb: "Chef whites, aprons, and table linens back before every service." },
   { icon: Stethoscope, name: "Healthcare", blurb: "Thermal disinfection with documented, inspection-ready protocols." },
-  { icon: Home, name: "Airbnb Hosts", blurb: "Sealed turnover kits and same-day SLAs across all your units." },
+  { icon: Home, name: "Shortlet & Airbnb Hosts", blurb: "Sealed turnover kits and same-day SLAs across all your units." },
   { icon: Dumbbell, name: "Gyms & Fitness", blurb: "High-volume towel programs with odor-elimination chemistry." },
   { icon: Scissors, name: "Salons & Spas", blurb: "Soft, bright towels and robes that match your brand." },
   { icon: GraduationCap, name: "Schools", blurb: "Athletics, dorm programs, and uniform cleaning at scale." },
@@ -25,10 +25,10 @@ const industries = [
 
 const caseStudies = [
   {
-    client: "The Meridian Hotel — 120 rooms",
+    client: "The Meridian Hotel, Victoria Island — 120 rooms",
     metric: "31%",
     metricLabel: "linen cost reduction",
-    body: "Replaced an aging in-house laundry with nightly Lustra routes. 98.7% on-time SLA over the last quarter, and the old laundry room is now a revenue-generating gym.",
+    body: "Replaced an ageing in-house laundry — and its diesel bill — with nightly Lustra routes. 98.7% on-time SLA over the last quarter, and the old laundry room is now a revenue-generating gym.",
   },
   {
     client: "Solstice Restaurant Group — 3 venues",
@@ -37,7 +37,7 @@ const caseStudies = [
     body: "Nightly pickup after close, chef whites and linens delivered before morning prep. One consolidated invoice replaced three vendors and a drawer of receipts.",
   },
   {
-    client: "Hill Country Stays — 27 Airbnb units",
+    client: "Eko Shortlets — 27 apartments across Lekki & VI",
     metric: "0",
     metricLabel: "missed turnovers in 12 months",
     body: "Sealed turnover kits per bed size, kit inventory visible in the dashboard, and same-day emergency service used exactly four times — all four saved a five-star review.",

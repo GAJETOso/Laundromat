@@ -7,26 +7,26 @@ import { formatCurrency } from "@/lib/utils";
 /**
  * In-house cost model (industry benchmarks, see blog: "The Real Cost of
  * In-House Hotel Laundry"): labor + utilities + chemistry + equipment
- * depreciation + linen wear ≈ $1.35/lb blended.  Lustra commercial blended
- * rate at volume ≈ $0.95/lb.
+ * depreciation + generator fuel + linen wear ≈ ₦900/kg blended. Lustra
+ * commercial blended rate at volume ≈ ₦650/kg.
  */
-const IN_HOUSE_PER_LB = 1.35;
-const LUSTRA_PER_LB = 0.95;
-const HOURS_SAVED_PER_100_LBS = 2.5;
+const IN_HOUSE_PER_KG = 900;
+const LUSTRA_PER_KG = 650;
+const HOURS_SAVED_PER_50_KG = 2.5;
 
 export function RoiCalculator() {
-  const [weeklyLbs, setWeeklyLbs] = useState(400);
+  const [weeklyKg, setWeeklyKg] = useState(200);
 
   const model = useMemo(() => {
-    const inHouse = weeklyLbs * IN_HOUSE_PER_LB * 52;
-    const lustra = weeklyLbs * LUSTRA_PER_LB * 52;
+    const inHouse = weeklyKg * IN_HOUSE_PER_KG * 52;
+    const lustra = weeklyKg * LUSTRA_PER_KG * 52;
     return {
       inHouse,
       lustra,
       savings: inHouse - lustra,
-      hours: Math.round((weeklyLbs / 100) * HOURS_SAVED_PER_100_LBS * 52),
+      hours: Math.round((weeklyKg / 50) * HOURS_SAVED_PER_50_KG * 52),
     };
-  }, [weeklyLbs]);
+  }, [weeklyKg]);
 
   return (
     <div className="card p-8">
@@ -35,27 +35,27 @@ export function RoiCalculator() {
         ROI calculator
       </h3>
       <p className="mt-2 text-sm text-muted">
-        Modeled on industry benchmarks for fully-loaded in-house laundry cost (labor, utilities,
-        chemistry, depreciation, linen wear).
+        Modeled on industry benchmarks for fully-loaded in-house laundry cost (labour, utilities, chemistry,
+        depreciation, generator fuel, linen wear).
       </p>
 
       <div className="mt-8">
         <label htmlFor="roi-volume" className="label">
-          Weekly laundry volume: <strong>{weeklyLbs.toLocaleString()} lbs</strong>
+          Weekly laundry volume: <strong>{weeklyKg.toLocaleString()} kg</strong>
         </label>
         <input
           id="roi-volume"
           type="range"
-          min={100}
-          max={3000}
-          step={50}
-          value={weeklyLbs}
-          onChange={(e) => setWeeklyLbs(Number(e.target.value))}
+          min={50}
+          max={1500}
+          step={25}
+          value={weeklyKg}
+          onChange={(e) => setWeeklyKg(Number(e.target.value))}
           className="w-full accent-aqua-500"
         />
         <div className="mt-1 flex justify-between text-xs text-muted">
-          <span>100 lbs</span>
-          <span>3,000 lbs</span>
+          <span>50 kg</span>
+          <span>1,500 kg</span>
         </div>
       </div>
 

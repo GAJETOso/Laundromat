@@ -22,19 +22,19 @@ const team = [
   { name: "Maya Lindqvist", role: "Co-founder & CEO", bio: "Former hospitality operator who got tired of laundry being the worst vendor relationship in the building." },
   { name: "Ade Balogun", role: "Co-founder & CTO", bio: "Built logistics platforms before pointing route optimization at laundry vans and IoT at washing machines." },
   { name: "Dr. Lena Whitfield", role: "Head of Fabric Science", bio: "Textile chemistry PhD. Believes every stain has a story and most of them are solvable." },
-  { name: "Marcus Hale", role: "VP Commercial", bio: "Fifteen years in hotel operations, now on the other side of the linen program he always wanted." },
+  { name: "Marcus Hale", role: "VP Commercial", bio: "Fifteen years running Lagos hotel operations, now on the other side of the linen program he always wanted." },
   { name: "Sofia Marchetti", role: "Couture Studio Lead", bio: "Trained in garment conservation in Milan. Wedding dresses arrive nervous and leave photographed." },
   { name: "Jordan Park", role: "Head of Experience", bio: "Designs the floors, the app, and the moment your dryer finishes and your phone knows first." },
 ];
 
 const milestones = [
-  { year: "2019", event: "First location opens in Downtown Austin — 24 machines and a stubborn belief that laundromats could be beautiful." },
+  { year: "2019", event: "First location opens on Admiralty Way, Lekki — 24 machines, 24/7 power backup, and a stubborn belief that laundromats could be beautiful." },
   { year: "2020", event: "Pickup & delivery launches with two vans and a route algorithm written over a weekend." },
-  { year: "2022", event: "Commercial division signs its first hotel. Midtown 24-hour flagship opens with 60 machines." },
+  { year: "2022", event: "Commercial division signs its first Victoria Island hotel. The 24-hour VI flagship opens with 60 machines." },
   { year: "2023", event: "QR machine activation and live availability ship. Coin machines retired, unmourned." },
-  { year: "2024", event: "Couture studio opens. University District location brings student pricing to campus." },
+  { year: "2024", event: "Couture & traditional attire studio opens. The Yaba location brings student pricing to campus." },
   { year: "2025", event: "WhatsApp & Telegram assistants launch. 1 millionth garment cleaned." },
-  { year: "2026", event: "180+ commercial clients, 35,000 customers, and a platform ready for new cities." },
+  { year: "2026", event: "180+ commercial clients, 35,000 customers, and a platform ready for Abuja, Port Harcourt, and beyond." },
 ];
 
 const sustainability = [

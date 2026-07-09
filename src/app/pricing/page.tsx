@@ -8,9 +8,9 @@ import { buildMetadata, JsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import { formatCurrency } from "@/lib/utils";
 
 export const metadata = buildMetadata({
-  title: "Pricing — Wash & Fold from $1.75/lb, Machines from $3.50",
+  title: "Pricing — Wash & Fold from ₦1,200/kg, Machines from ₦2,500",
   description:
-    "Transparent laundry pricing: interactive wash & fold calculator, self-service machine rates, dry cleaning price list, and membership plans. No hidden fees, free pickup & delivery.",
+    "Transparent laundry pricing in Lagos: interactive wash & fold calculator, self-service machine rates, dry cleaning price list, and membership plans. No hidden fees, free pickup & delivery.",
   path: "/pricing",
 });
 
