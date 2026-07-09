@@ -8,7 +8,7 @@ with customer, admin, and driver dashboards and an AI assistant available on
 web, WhatsApp, and Telegram. Pricing is in Naira (₦), units are metric (kg),
 payments lead with Paystack & Flutterwave, and privacy follows the NDPA 2023.
 
-![Stack](https://img.shields.io/badge/Next.js%2014-black) ![TS](https://img.shields.io/badge/TypeScript-strict-blue) ![Tailwind](https://img.shields.io/badge/Tailwind%20CSS-3-38bdf8) ![License](https://img.shields.io/badge/license-proprietary-lightgrey)
+![Stack](https://img.shields.io/badge/Next.js%2014-black) ![TS](https://img.shields.io/badge/TypeScript-strict-blue) ![Tailwind](https://img.shields.io/badge/Tailwind%20CSS-3-38bdf8) ![License](https://img.shields.io/badge/license-Apache%202.0-green)
 
 ## Quick start
 
@@ -122,8 +122,10 @@ and in the architecture doc.
 
 ## License
 
-Proprietary — copyright © 2026 GAJETOso, all rights reserved (see
-[LICENSE](LICENSE)). The code is viewable for evaluation but may not be
-copied, modified, or redistributed without written permission. To open-source
-the project instead, replace `LICENSE` with an OSI license (MIT for maximum
-adoption, AGPL-3.0 to keep hosted derivatives open) and update this section.
+Licensed under the [Apache License 2.0](LICENSE) — copyright © 2026 GAJETOso
+(see [NOTICE](NOTICE)). You're free to use, modify, and distribute this code,
+including commercially, provided you preserve the license and attribution
+notices and state significant changes. The license includes an explicit patent
+grant for contributors and users. The **"Lustra" name and logo are trademarks
+and are not licensed** (Apache 2.0 §6) — derivative deployments must use their
+own branding.

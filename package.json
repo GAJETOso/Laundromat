@@ -2,7 +2,8 @@
   "name": "lustra-laundry-platform",
   "version": "1.0.0",
   "private": true,
-  "description": "Lustra — premium laundry platform: self-service laundromat, pickup & delivery, commercial laundry, and dry cleaning.",
+  "license": "Apache-2.0",
+  "description": "Lustra — premium laundry platform for Nigeria: self-service laundromats, pickup & delivery, commercial laundry, dry cleaning, and traditional attire care.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
