@@ -1,4 +1,4 @@
-import { Leaf, Cpu, HeartHandshake, Award, Users, Recycle } from "lucide-react";
+import { Leaf, Cpu, HeartHandshake, Award, Users, Recycle, Telescope, Compass, Crown, Zap, ShieldCheck } from "lucide-react";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { Reveal, Stagger, StaggerItem } from "@/components/shared/reveal";
 import { CtaBanner } from "@/components/shared/cta-banner";
@@ -16,6 +16,8 @@ const values = [
   { icon: Cpu, title: "Technology that disappears", body: "The best tech is the tap you didn't have to make. We automate the friction and keep the humanity." },
   { icon: Leaf, title: "Clean shouldn't cost the planet", body: "Water reclamation, biodegradable chemistry, and zero-perc cleaning as the default, not the upsell." },
   { icon: Award, title: "Standards over shortcuts", body: "Retail-standard folds, 12-point quality checks, and SLAs we publish instead of hiding." },
+  { icon: Crown, title: "Heritage handled with reverence", body: "Agbada, aso-oke, lace, and gele carry family history. Every traditional garment is an heirloom in progress." },
+  { icon: Zap, title: "We show up — with the lights on", body: "24/7 power backup, published hours, and answered phones. Reliability is the first luxury." },
 ];
 
 const team = [
@@ -63,9 +65,72 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <section className="section py-24">
+      {/* Vision, mission & purpose */}
+      <section className="section py-24" aria-labelledby="mission-heading">
+        <SectionHeading eyebrow="Why we exist" title="Vision, mission & promise" />
+        <div className="grid gap-6 lg:grid-cols-2">
+          <Reveal>
+            <div className="card h-full p-8 md:p-10">
+              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-cta-gradient text-white shadow-glow">
+                <Telescope className="h-6 w-6" aria-hidden />
+              </span>
+              <p className="mt-5 text-xs font-bold uppercase tracking-[0.2em] text-aqua-600 dark:text-aqua-400">
+                Our vision
+              </p>
+              <p className="h-display mt-2 text-2xl leading-snug">
+                To be Africa&apos;s most loved laundry company — the standard by which garment care
+                is measured.
+              </p>
+            </div>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <div className="card h-full p-8 md:p-10">
+              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-cta-gradient text-white shadow-glow">
+                <Compass className="h-6 w-6" aria-hidden />
+              </span>
+              <p className="mt-5 text-xs font-bold uppercase tracking-[0.2em] text-aqua-600 dark:text-aqua-400">
+                Our mission
+              </p>
+              <p className="h-display mt-2 text-2xl leading-snug">
+                We give people their time back — through flawless garment care, beautiful spaces,
+                obsessive craft, and technology that disappears.
+              </p>
+            </div>
+          </Reveal>
+        </div>
+        <Reveal delay={0.14}>
+          <div className="mt-6 overflow-hidden rounded-4xl bg-ink-900 p-8 text-white md:p-10">
+            <div className="flex flex-col gap-6 md:flex-row md:items-center">
+              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/10">
+                <ShieldCheck className="h-7 w-7 text-aqua-400" aria-hidden />
+              </span>
+              <div className="flex-1">
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-aqua-400">Our promise</p>
+                <p className="h-display mt-1 text-xl md:text-2xl">Like new, on time, every time.</p>
+                <p className="mt-2 text-sm text-ink-200/80">
+                  Every garment is photographed at intake, cleaned to your saved preferences,
+                  quality-checked by a named specialist, and returned when we said it would be — or
+                  we make it right within 48 hours. Insured up to ₦500,000 per item.
+                </p>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+        <Reveal delay={0.18}>
+          <p className="mx-auto mt-10 max-w-2xl text-center text-lg italic leading-relaxed text-muted">
+            &ldquo;Time spent on chores is time taken from lives. Every hour we return to a customer
+            is an hour returned to family, work, rest, and ambition.&rdquo;
+            <span className="mt-2 block text-xs font-bold not-italic uppercase tracking-[0.2em] text-aqua-600 dark:text-aqua-400">
+              — Our purpose
+            </span>
+          </p>
+        </Reveal>
+      </section>
+
+      <section className="border-y border-[rgb(var(--border))] bg-[rgb(var(--card))]/50 py-24">
+        <div className="section">
         <SectionHeading eyebrow="Values" title="What we refuse to compromise" />
-        <Stagger className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <Stagger className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {values.map((v) => {
             const Icon = v.icon;
             return (
@@ -81,10 +146,10 @@ export default function AboutPage() {
             );
           })}
         </Stagger>
+        </div>
       </section>
 
-      <section className="border-y border-[rgb(var(--border))] bg-[rgb(var(--card))]/50 py-24">
-        <div className="section">
+      <section className="section py-24">
           <SectionHeading eyebrow="History" title="Seven years, one obsession" />
           <ol className="relative mx-auto max-w-2xl space-y-8 border-l-2 border-aqua-500/30 pl-8">
             {milestones.map((m) => (
@@ -97,7 +162,6 @@ export default function AboutPage() {
               </Reveal>
             ))}
           </ol>
-        </div>
       </section>
 
       <section className="section py-24">
